@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "535230811131",
+    "project_id": "gotcha-a38fd",
+    "storage_bucket": "gotcha-a38fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:535230811131:android:1d90a54ed4aff4a933595e",
+        "android_client_info": {
+          "package_name": "com.example.gotcha"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHxr15-WLiBBban-b1tfHTx2nYM_eCa1Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
