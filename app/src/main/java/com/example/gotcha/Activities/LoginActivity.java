@@ -3,6 +3,7 @@ package com.example.gotcha.Activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultCallback;
@@ -35,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("ggg", "onCreate (func: onCreate)");
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -42,35 +45,54 @@ public class LoginActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
         findviews();
         initViews();
-
 
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         if(user == null){
+            //no user is logged in
+            Log.d("ggg", "no user is logged in (func: onCreate)");
             login();
-            //getUserDataFromFirebase();
         }else{
-            String uid = user.getUid();
-            String phone = user.getPhoneNumber();
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            String pid = user.getProviderId();
-            Uri photo = user.getPhotoUrl();
+            //user already logged in
+            Log.d("ggg", "user already logged in (func: onCreate)");
+            loadLoggedInUser();
+
         }
+        Log.d("ggg", "User: " +user.getEmail() + " (func: onCreate)");
+        goToMainActivity();
+
     }
+
+
+    private void logOutUser() {
+        AuthUI.getInstance()
+                .signOut(this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    public void onComplete(@NonNull Task<Void> task) {
+                    }
+                });
+    }
+
 
     private void initViews() {
         login_BTN_signOut.setOnClickListener(v -> {
-            AuthUI.getInstance()
-                    .signOut(this)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        public void onComplete(@NonNull Task<Void> task) {
-                            // ...
-                        }
-                    });
+                logOutUser();
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
+    private void goToMainActivity() {
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 
     private void findviews() {
@@ -85,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                 new AuthUI.IdpConfig.EmailBuilder().build(),
                 new AuthUI.IdpConfig.PhoneBuilder().build());
 
-// Create and launch sign-in intent
+        // Create and launch sign-in intent
         Intent signInIntent = AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
@@ -94,7 +116,14 @@ public class LoginActivity extends AppCompatActivity {
         signInLauncher.launch(signInIntent);
     }
 
-    // See: https://developer.android.com/training/basics/intents/result
+    private void loadLoggedInUser() {
+        //TODO
+
+
+
+    }
+
+
     private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
             new FirebaseAuthUIActivityResultContract(),
             new ActivityResultCallback<FirebaseAuthUIAuthenticationResult>() {
@@ -108,10 +137,14 @@ public class LoginActivity extends AppCompatActivity {
     private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
         IdpResponse response = result.getIdpResponse();
         if (result.getResultCode() == RESULT_OK) {
+            Log.d("ggg", "Successfully signed in (func: onSignInResult)");
             // Successfully signed in
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            // ...
+            //getUserDataFromFirebase();
+            goToMainActivity();
+
         } else {
+            Log.d("ggg", "Error in Sign in (func: onSignInResult)");
             // Sign in failed. If response is null the user canceled the
             // sign-in flow using the back button. Otherwise check
             // response.getError().getErrorCode() and handle the error.

@@ -7,14 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".Activities.LoginActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wrong path :("
+        android:textSize="26sp"
+        android:layout_centerInParent="true"
+
+        />
     <com.google.android.material.button.MaterialButton
         android:id="@+id/login_BTN_signOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign out"
-        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
 
         />
-
 
 </RelativeLayout>
