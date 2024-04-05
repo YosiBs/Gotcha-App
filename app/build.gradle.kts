@@ -51,5 +51,6 @@ dependencies {
     // Authentication
     implementation (libs.firebase.authentication.ui)
     implementation(libs.gms.play.services.auth)
-
+    //DataBase
+    implementation(libs.firebase.database)
 }

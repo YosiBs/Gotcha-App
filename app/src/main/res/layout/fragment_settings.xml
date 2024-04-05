@@ -16,14 +16,12 @@
         android:layout_centerInParent="true"
 
         />
-
-    <com.google.android.material.button.MaterialButton
+    <ImageButton
         android:id="@+id/log_out_BTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/logout_icon"
         android:background="@color/white"
-        android:textColor="@color/black"
-        android:text="Log Out"
         />
 
 

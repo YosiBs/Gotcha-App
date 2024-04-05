@@ -14,6 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.gotcha.Models.CurrentUser;
 import com.example.gotcha.R;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
@@ -56,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
             //no user is logged in
             Log.d("ggg", "no user is logged in (func: onCreate)");
             login();
+            
         }else{
             //user already logged in
             Log.d("ggg", "user already logged in (func: onCreate)");
@@ -63,8 +65,17 @@ public class LoginActivity extends AppCompatActivity {
 
         }
         Log.d("ggg", "User: " +user.getEmail() + " (func: onCreate)");
+        checkIfUserInDatabase();
         goToMainActivity();
 
+    }
+
+    private boolean checkIfUserInDatabase() {
+        //get current user
+        //check if his uid is in the DB
+        //if true : return true
+        //if false : add him to the DB and return
+        return true;
     }
 
 
