@@ -15,9 +15,13 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.gotcha.Fragments.AddItemFragment;
 import com.example.gotcha.Fragments.CategoriesFragment;
 import com.example.gotcha.Fragments.HomeFragment;
+import com.example.gotcha.Models.CurrentUser;
+import com.example.gotcha.Models.User;
 import com.example.gotcha.R;
 import com.example.gotcha.Fragments.SettingsFragment;
 import com.example.gotcha.databinding.ActivityMainBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +41,14 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
             return insets;
         });
+        Log.d("ggg", "In MainActivity");
+
+        //init CurrentUser:
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(currentUser != null){
+            User user = new User(currentUser.getUid(), currentUser.getDisplayName(), currentUser.getPhotoUrl().toString());
+            CurrentUser.getInstance().setUserProfile(user);
+        }
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             if(item.getItemId() == R.id.home){
@@ -50,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
+
     }
     private void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager= getSupportFragmentManager();

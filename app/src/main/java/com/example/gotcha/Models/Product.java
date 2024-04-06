@@ -29,10 +29,19 @@ public class Product {
     private String purchaseLocation = "" ; // Location where the product was purchased.
     private String serialNumber = "" ; // Serial number of the product (if applicable).
     private String notes = "" ; // Any additional notes about the product.
-
-
+    private boolean hasWarranty ;
+    private Warranty warranty;
     public Product(){
 
+    }
+
+    public boolean isHasWarranty() {
+        return hasWarranty;
+    }
+
+    public Product setHasWarranty(boolean hasWarranty) {
+        this.hasWarranty = hasWarranty;
+        return this;
     }
 
     public String getProductName() {

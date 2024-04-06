@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.gotcha.Models.CurrentUser;
+import com.example.gotcha.Models.User;
 import com.example.gotcha.R;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
@@ -25,6 +26,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,11 +36,15 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private MaterialButton login_BTN_signOut;
+    private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference databaseRef = mDatabase.getReference();
+    private FirebaseUser firebaseUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("ggg", "onCreate (func: onCreate)");
+        Log.d("ggg", "------------START------------ (func: onCreate)");
 
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
@@ -52,22 +59,30 @@ public class LoginActivity extends AppCompatActivity {
         initViews();
 
         auth = FirebaseAuth.getInstance();
-        FirebaseUser user = auth.getCurrentUser();
-        if(user == null){
+        firebaseUser = auth.getCurrentUser();
+        if(firebaseUser == null){
             //no user is logged in
             Log.d("ggg", "no user is logged in (func: onCreate)");
             login();
-            
         }else{
             //user already logged in
             Log.d("ggg", "user already logged in (func: onCreate)");
             loadLoggedInUser();
-
         }
-        Log.d("ggg", "User: " +user.getEmail() + " (func: onCreate)");
+        Log.d("ggg", "User: " + firebaseUser.getEmail() + " (func: onCreate)");
+       //initCurrentUser();
         checkIfUserInDatabase();
+
         goToMainActivity();
 
+    }
+
+    private void initCurrentUser() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        User user = new User(currentUser.getUid(), currentUser.getDisplayName(), currentUser.getPhotoUrl().toString());
+        if(currentUser != null){
+            CurrentUser.getInstance().setUserProfile(user);
+        }
     }
 
     private boolean checkIfUserInDatabase() {
@@ -75,6 +90,14 @@ public class LoginActivity extends AppCompatActivity {
         //check if his uid is in the DB
         //if true : return true
         //if false : add him to the DB and return
+
+
+        //createNewUserInDatabase();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        User user = new User(currentUser.getUid(), currentUser.getDisplayName(), currentUser.getPhotoUrl().toString());
+        CurrentUser.getInstance().setUserProfile(user);
+        databaseRef = FirebaseDatabase.getInstance().getReference("Users");
+        databaseRef.child(firebaseUser.getUid()).setValue(user);
         return true;
     }
 

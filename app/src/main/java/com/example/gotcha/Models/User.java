@@ -1,19 +1,24 @@
 package com.example.gotcha.Models;
 
+import org.checkerframework.checker.units.qual.A;
+
+import java.util.ArrayList;
+
 public class User {
 
     private String uid;
-    private String Name;
+    private String name;
     private String image;
     private boolean isRegistered;
-
+    private ArrayList<Product> productList;
     public User(){
 
     }
     public User(String uid, String name, String image) {
         this.uid = uid;
-        Name = name;
+        this.name = name;
         this.image = image;
+        this.productList = new ArrayList<Product>();
     }
 
     public String getUid() {
@@ -26,11 +31,11 @@ public class User {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public User setName(String name) {
-        Name = name;
+        this.name = name;
         return this;
     }
 
@@ -56,7 +61,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "uid='" + uid + '\'' +
-                ", Name='" + Name + '\'' +
+                ", Name='" + name + '\'' +
                 ", image='" + image + '\'' +
                 ", isRegistered=" + isRegistered +
                 '}';

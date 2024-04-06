@@ -8,14 +8,22 @@
     >
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/frag_text_hello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Home Fragment"
+        android:text="hello User"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         android:textSize="30sp"
         android:layout_gravity="center"
-
-
         />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_user_profile"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/no_photo" />
+
 
 </FrameLayout>
