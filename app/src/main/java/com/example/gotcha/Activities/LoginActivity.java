@@ -26,8 +26,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.checkerframework.checker.units.qual.Current;
 
 import java.util.Arrays;
 import java.util.List;
@@ -86,18 +91,44 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean checkIfUserInDatabase() {
-        //get current user
-        //check if his uid is in the DB
-        //if true : return true
-        //if false : add him to the DB and return
+        //1. get current user
+        //2. check if the user is in the DB
+        //3. if not : add him to the DB and return
 
 
-        //createNewUserInDatabase();
+        // 1
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        User user = new User(currentUser.getUid(), currentUser.getDisplayName(), currentUser.getPhotoUrl().toString());
-        CurrentUser.getInstance().setUserProfile(user);
-        databaseRef = FirebaseDatabase.getInstance().getReference("Users");
-        databaseRef.child(firebaseUser.getUid()).setValue(user);
+        if(currentUser != null){
+            //2
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference usersRef = database.getReference("Users").child(currentUser.getUid());
+
+            // Check if the user's UID exists in the "Users" node
+            usersRef.child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        // User exists in the database
+                        // You can perform any necessary actions here
+                        Log.d("Database", "User exists in the database");
+
+                        // Optionally, you can retrieve and process user data here
+                        // User user = dataSnapshot.getValue(User.class);
+                    } else {
+                        // User does not exist in the database
+                        // Add the user to the database
+                        //3
+                        createNewUser();
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Handle potential error
+                    Log.e("FirebaseError", "Error checking user data: " + databaseError.getMessage());
+                }
+            });
+
+        }
         return true;
     }
 
@@ -151,10 +182,47 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loadLoggedInUser() {
-        //TODO
+
+        databaseRef = FirebaseDatabase.getInstance().getReference("Users");
+        DatabaseReference userRef = databaseRef.child(firebaseUser.getUid());
+        int x = 2;
+        // Add a listener to retrieve the user data
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                // Check if the user data exists
+                if (dataSnapshot.exists()) {
+
+                    // Retrieve user data
+                    User user = dataSnapshot.getValue(User.class);
+                    // Do something with the user object (e.g., display user details)
+                    if (user != null) {
+                        CurrentUser.getInstance().setUserProfile(user);
+                    }
+                } else {
+                    Log.d("UserDetails", "User not found");
+                    createNewUser();
+                }
+                goToMainActivity();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle database error
+                Log.e("FirebaseError", "Error retrieving user: " + databaseError.getMessage());
+            }
+        });
 
 
 
+    }
+
+    private void createNewUser() {
+        User newUser = new User(firebaseUser.getUid(), firebaseUser.getDisplayName(),firebaseUser.getPhotoUrl().toString());
+        CurrentUser.getInstance().setUserProfile(newUser);
+        databaseRef = FirebaseDatabase.getInstance().getReference("Users");
+        databaseRef.child(firebaseUser.getUid()).setValue(newUser);
     }
 
 
