@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Home Fragment layout-->
+    <dimen name="padding">2dp</dimen>
+    <dimen name="image_width">120dp</dimen>
+    <dimen name="image_height">100dp</dimen>
+    <dimen name="image_vertical_margin">5dp</dimen>
+    <dimen name="image_corner_radius">20dp</dimen>
+    <dimen name="image_elevation">10dp</dimen>
+    <dimen name="product_card_height">80dp</dimen>
+    <dimen name="product_start_margin">85dp</dimen>
+    <dimen name="product_end_margin">5dp</dimen>
+    <dimen name="product_elevation">8dp</dimen>
+    <dimen name="title_text_size">18sp</dimen>
+    <dimen name="product_text_size">11sp</dimen>
+    <dimen name="product_list_marginTop">80dp</dimen>
+    <dimen name="user_image_width">60dp</dimen>
+    <dimen name="user_image_height">60dp</dimen>
+
+    <!--Categories Fragment layout-->
+    <dimen name="category_list_marginTop">80dp</dimen>
+    <dimen name="category_card_height">80dp</dimen>
+    <dimen name="user_image_marginLeft">8dp</dimen>
+    <dimen name="user_image_marginRight">8dp</dimen>
+    <dimen name="user_name_text_size">30sp</dimen>
+    <dimen name="category_start_margin">12dp</dimen>
+    <dimen name="category_end_margin">5dp</dimen>
+    <dimen name="category_elevation">8dp</dimen>
+
+
+
+
+    <!--General Values-->
+    <dimen name="headline_text_size">30sp</dimen>
+    <dimen name="headline_text_marginVertical">16dp</dimen>
+
+
+
+</resources>

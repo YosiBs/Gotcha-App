@@ -20,23 +20,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 
 public class HomeFragment extends Fragment {
+    private ShapeableImageView user_IMG_profile;
+    private MaterialTextView home_frag_text_user_name;
 
-
-    private ShapeableImageView image_user_profile;
-
-    private MaterialTextView frag_text_hello;
-
-
-
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,20 +36,15 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         findViews(view);
         setupHomeFragment();
         Log.d("ggg", "In HomeFragment");
-
         return view;
     }
-
     private void setupHomeFragment() {
         loadUserFromDB();
-
     }
-
     private void loadUserFromDB() {
         FirebaseDatabase database= FirebaseDatabase.getInstance();
         DatabaseReference userRef = database.getReference("Users").child(CurrentUser.getInstance().getUid());
@@ -77,8 +62,7 @@ public class HomeFragment extends Fragment {
                     if (user != null) {
                         // Access other user properties as needed
                         changeUserNameUI(CurrentUser.getInstance().getUserProfile().getName());
-
-
+                        changeUserImageUI(CurrentUser.getInstance().getUserProfile().getImage());
                     }
                 } else {
                     Log.d("ggg", "User not found");
@@ -95,16 +79,20 @@ public class HomeFragment extends Fragment {
     }
 
     private void findViews(View view) {
-        image_user_profile = view.findViewById(R.id.image_user_profile);
-        frag_text_hello = view.findViewById(R.id.frag_text_hello);
+        user_IMG_profile = view.findViewById(R.id.user_IMG_profile);
+        home_frag_text_user_name = view.findViewById(R.id.home_frag_text_user_name);
     }
 
     private void changeUserNameUI(String fullName) {
         String[] firstName = fullName.split(" ");
-        frag_text_hello.setText("Hello " + firstName[0]);
+        home_frag_text_user_name.setText("Hello " + firstName[0]);
     }
-    private void changeUserImageUI(String Url) {
-        //TODO
+    private void changeUserImageUI(String imageUrl) {
+        Picasso.get()
+                .load(imageUrl)
+                .placeholder(R.drawable.image_placeholder) // Placeholder image while loading
+                .error(R.drawable.loading_error_image) // Error image if loading fails
+                .into(user_IMG_profile);
     }
 
 }

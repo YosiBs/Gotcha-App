@@ -44,6 +44,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    //Picasso Library
+    implementation(libs.picasso.library)
+
 
     //Google Console firebase
     implementation(platform(libs.firebase.bom))

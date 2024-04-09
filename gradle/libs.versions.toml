@@ -11,6 +11,7 @@ constraintlayout = "2.1.4"
 gms = "4.4.1"
 authUI = "7.2.0"
 gmsPlayServicesAuth = "20.7.0"
+picasso = "2.71828"
 
 [libraries]
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
@@ -25,6 +26,8 @@ firebase-analytics = {module = "com.google.firebase:firebase-analytics"}
 firebase-authentication-ui = {module = "com.firebaseui:firebase-ui-auth", version.ref = "authUI"}
 gms-play-services-auth = {module = "com.google.android.gms:play-services-auth" , version.ref = "gmsPlayServicesAuth"}
 firebase-database = {module = "com.google.firebase:firebase-database"}
+picasso-library = {module = "com.squareup.picasso:picasso" ,version.ref = "picasso"}
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
