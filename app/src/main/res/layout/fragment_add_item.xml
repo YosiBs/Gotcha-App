@@ -1,19 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.AddItemFragment"
-    android:background="#D500F9"
+    tools:background="#D500F9"
+
     >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+<!--ITEM IMAGE-->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/form_IMG_product"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/product_image_height"
+                android:src="@drawable/product_placeholder_icon"
+                android:background="@color/grey"/>
+<!--ITEM NAME-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/form_input_text_margin"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="@string/item_name"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:drawableStart="@drawable/item_name"
+
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+<!--ITEM Price-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/form_input_text_margin"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="@string/product_price"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:drawableStart = "@drawable/price"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_BTN_upload_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add_item Fragment"
-        android:textSize="26sp"
-        android:layout_gravity="center"
-        />
+        android:layout_margin="16dp"
+        android:src="@drawable/camera_icon"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:tint="@color/white"
+        app:layout_anchor="@id/form_IMG_product"
+        app:layout_anchorGravity="bottom|right|end"
+        android:contentDescription="@string/upload_image" />
 
-</FrameLayout>
+
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -12,6 +12,10 @@ gms = "4.4.1"
 authUI = "7.2.0"
 gmsPlayServicesAuth = "20.7.0"
 picasso = "2.71828"
+materialVersion = "1.2.0"
+corrdinatorLayoutVersion = "1.1.0"
+
+
 
 [libraries]
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
@@ -27,6 +31,10 @@ firebase-authentication-ui = {module = "com.firebaseui:firebase-ui-auth", versio
 gms-play-services-auth = {module = "com.google.android.gms:play-services-auth" , version.ref = "gmsPlayServicesAuth"}
 firebase-database = {module = "com.google.firebase:firebase-database"}
 picasso-library = {module = "com.squareup.picasso:picasso" ,version.ref = "picasso"}
+#Form (addItem)
+form-materials = {module = "com.google.android.material:material", version.ref = "materialVersion"}
+coordinator-layout = {module = "androidx.coordinatorlayout:coordinatorlayout" , version.ref = "corrdinatorLayoutVersion"}
+
 
 
 [plugins]

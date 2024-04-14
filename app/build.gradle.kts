@@ -56,4 +56,7 @@ dependencies {
     implementation(libs.gms.play.services.auth)
     //DataBase
     implementation(libs.firebase.database)
+    //Form (addItem)
+    implementation (libs.form.materials)
+    implementation (libs.coordinator.layout)
 }

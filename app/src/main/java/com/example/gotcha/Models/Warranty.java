@@ -7,12 +7,22 @@ public class Warranty {
     private String warrantyProvider;   // Name of the warranty provider (e.g., manufacturer, third-party service).
     private Date startDate;   // Start date of the warranty coverage.
     private Date endDate;   // End date of the warranty coverage.
+    private int warrantyLength; //In Days
     private String coverageDetails;   // Details of the warranty coverage (e.g., what's covered, exclusions).private String warrantyType;   // Type of warranty (e.g., manufacturer's warranty, extended warranty).
     private String warrantyNumber; // Warranty identification number (if applicable).
     private String warrantyContact;   // Contact information for warranty inquiries or claims.
 
     public Warranty(){
 
+    }
+
+    public int getWarrantyLength() {
+        return warrantyLength;
+    }
+
+    public Warranty setWarrantyLength(int warrantyLength) {
+        this.warrantyLength = warrantyLength;
+        return this;
     }
 
     public String getWarrantyProvider() {

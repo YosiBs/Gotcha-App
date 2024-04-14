@@ -1,5 +1,20 @@
 <resources>
     <string name="app_name">Gotcha</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="manual_form">Manual Form</string>
+    <string name="item_name">Item Name</string>
+    <string name="product_price">Cost</string>
+    <string name="serial_number">Serial Number</string>
+    <string name="notes">Notes</string>
+    <string name="done">done</string>
+    <string name="upload_image">Upload Image</string>
+
+
+
+    <!--maybe map?-->
+    <string name="purchase_location">Purchase Location</string>
+    <!--calender-->
+    <string name="purchase_date">Purchase Date</string>
+    <!--dropbox-->
+    <string name="category">Select Category</string>
 </resources>
