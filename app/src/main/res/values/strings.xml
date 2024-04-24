@@ -2,13 +2,13 @@
     <string name="app_name">Gotcha</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="manual_form">Manual Form</string>
-    <string name="item_name">Item Name</string>
-    <string name="product_price">Cost</string>
-    <string name="serial_number">Serial Number</string>
-    <string name="notes">Notes</string>
-    <string name="done">done</string>
-    <string name="upload_image">Upload Image</string>
+    <string name="item_name">\ Item Name</string>
+    <string name="product_price">\ Cost</string>
+    <string name="serial_number">\ Serial Number</string>
+    <string name="notes">\ Notes</string>
+    <string name="upload_image">\ Upload Image</string>
 
+    <string name="done">done</string>
 
 
     <!--maybe map?-->
@@ -17,4 +17,24 @@
     <string name="purchase_date">Purchase Date</string>
     <!--dropbox-->
     <string name="category">Select Category</string>
+
+
+    <string-array name="categories">
+        <item>ELECTRONICS</item>
+        <item>APPLIANCES</item>
+        <item>CLOTHING</item>
+        <item>FURNITURE</item>
+        <item>SPORTING_GOODS</item>
+        <item>TOYS</item>
+        <item>BEAUTY</item>
+        <item>BOOKS</item>
+        <item>JEWELRY</item>
+        <item>AUTOMOTIVE</item>
+        <item>HOME_AND_GARDEN</item>
+        <item>HEALTH_AND_WELLNESS</item>
+        <item>OFFICE_SUPPLIES</item>
+        <item>FOOD_AND_DRINK</item>
+        <item>OTHER</item>
+    </string-array>
+
 </resources>

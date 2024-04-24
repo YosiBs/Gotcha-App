@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
             return insets;
         });
-        Log.d("ggg", "In MainActivity");
 
         //init CurrentUser:
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();

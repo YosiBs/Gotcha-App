@@ -28,6 +28,7 @@
     <dimen name="category_elevation">8dp</dimen>
 
 
+    <dimen name="icon_marginStart">8dp</dimen>
 
 
     <!--General Values-->

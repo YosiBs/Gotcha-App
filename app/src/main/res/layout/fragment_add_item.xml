@@ -6,10 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.AddItemFragment"
-    tools:background="#D500F9"
-
     >
 
+<!--NestedScrollView-->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,15 +32,18 @@
                 android:layout_margin="@dimen/form_input_text_margin"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="@string/item_name"
+                app:boxStrokeColor="@color/black"
+                android:textColorHint="@color/grey"
                 >
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:drawableStart="@drawable/item_name"
-
+                    android:drawableStart = "@drawable/product_development"
+                    android:textColor="@color/black"
                     />
             </com.google.android.material.textfield.TextInputLayout>
+
 <!--ITEM Price-->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -49,19 +51,47 @@
                 android:layout_margin="@dimen/form_input_text_margin"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="@string/product_price"
+                app:boxStrokeColor="@color/black"
+                android:textColorHint="@color/grey"
                 >
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:drawableStart = "@drawable/price"
+                    android:drawableStart = "@drawable/coin"
+                    android:textColor="@color/black"
                     />
             </com.google.android.material.textfield.TextInputLayout>
+<!--ITEM Category-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/form_input_text_margin"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:hint="@string/category"
+                app:boxStrokeColor="@color/black"
+                android:textColorHint="@color/grey"
+                >
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="none"
+                    >
+                </AutoCompleteTextView>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
 
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+    <!--END: NestedScrollView-->
 
+
+    <!-- Floating Action Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floating_BTN_upload_image"
         android:layout_width="wrap_content"
