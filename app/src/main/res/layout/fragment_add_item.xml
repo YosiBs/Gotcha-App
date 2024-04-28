@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.AddItemFragment"
     >
-
 <!--NestedScrollView-->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -29,13 +28,15 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/form_input_text_margin"
+                android:layout_marginHorizontal="@dimen/form_input_text_margin_horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="@string/item_name"
                 app:boxStrokeColor="@color/black"
                 android:textColorHint="@color/grey"
                 >
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/formItemName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
@@ -46,9 +47,11 @@
 
 <!--ITEM Price-->
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/formItemPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/form_input_text_margin"
+                android:layout_marginHorizontal="@dimen/form_input_text_margin_horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="@string/product_price"
                 app:boxStrokeColor="@color/black"
@@ -64,28 +67,298 @@
             </com.google.android.material.textfield.TextInputLayout>
 <!--ITEM Category-->
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/formItemCatagory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/form_input_text_margin"
+                android:layout_marginHorizontal="@dimen/form_input_text_margin_horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:hint="@string/category"
+                app:startIconDrawable="@drawable/categorization"
                 app:boxStrokeColor="@color/black"
                 android:textColorHint="@color/grey"
+                android:textColor="@color/black"
                 >
                 <AutoCompleteTextView
                     android:id="@+id/autoCompleteTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:inputType="none"
+                    android:layout_weight="1"
+                    android:paddingStart="@dimen/autoCompleteTextView_padding"
                     >
                 </AutoCompleteTextView>
             </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
-
-
+<!--ITEM Purchase Date-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/form_input_text_margin_horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                >
+                <TextView
+                    android:id="@+id/dateHeadline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/purchase_date"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    />
+                <TextView
+                    android:id="@+id/dateText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:layout_toEndOf="@+id/dateHeadline"
+                    android:layout_centerVertical="true"
+                    android:hint="@string/select_date"
+                    />
+                <ImageButton
+                    android:id="@+id/BtnPickDate"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:text="@string/purchase_date"
+                    android:textAllCaps="false"
+                    android:src="@drawable/calendar"
+                    android:background="@color/fui_transparent"
+                    android:layout_alignParentEnd="true"
+                    />
+            </RelativeLayout>
+<!--ITEM SerialNumber-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/form_input_text_margin_horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="@string/serial_number"
+                app:boxStrokeColor="@color/black"
+                android:textColorHint="@color/grey"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapCharacters"
+                    android:drawableStart = "@drawable/barcode"
+                    android:textColor="@color/black"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+<!--ITEM Note-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/form_input_text_margin_horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="@string/notes"
+                app:boxStrokeColor="@color/black"
+                android:textColorHint="@color/grey"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:drawableStart = "@drawable/note"
+                    android:textColor="@color/black"
+                    android:scrollbars="vertical"
+                    android:maxLines="5"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+<!--ITEM HasWarranty-->
+            <CheckBox
+                android:id="@+id/hasWarrantyCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Do you want to add warranty Details"
+                android:layout_marginHorizontal="@dimen/form_input_text_margin_horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                >
+            </CheckBox>
+<!-- @@@@@@ WARRANTY PART @@@@@@@@-->
+<!--ITEM Warranty Provider-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/formWarrantyProvider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/form_input_text_margin_horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="@string/warranty_provider"
+                app:boxStrokeColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:visibility="gone"
+                tools:visibility="visible"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:drawableStart = "@drawable/services"
+                    android:textColor="@color/black"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+<!--ITEM Warranty Start Date-->
+            <RelativeLayout
+                android:id="@+id/formWarrantyStartDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/form_input_text_margin_horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                android:visibility="gone"
+                tools:visibility="visible"
+                >
+                <TextView
+                    android:id="@+id/startDateHeadline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/warranty_start_date"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    />
+                <TextView
+                    android:id="@+id/startDateText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/hint_margin_left"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/selectDate_hint_text_size"
+                    android:layout_toEndOf="@+id/startDateHeadline"
+                    android:layout_centerVertical="true"
+                    android:hint="@string/select_date"
+                    />
+                <ImageButton
+                    android:id="@+id/BtnPickStartDate"
+                    android:layout_width="@dimen/calender_button_width"
+                    android:layout_height="@dimen/calender_button_height"
+                    android:textAllCaps="false"
+                    android:src="@drawable/calendar"
+                    android:background="@color/fui_transparent"
+                    android:layout_alignParentEnd="true"
+                    />
+            </RelativeLayout>
+<!--ITEM Warranty End Date-->
+            <RelativeLayout
+                android:id="@+id/formWarrantyEndDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/form_input_text_margin_horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                android:visibility="gone"
+                tools:visibility="visible"
+                >
+                <TextView
+                    android:id="@+id/endDateHeadline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/warranty_end_date"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    />
+                <TextView
+                    android:id="@+id/endDateText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/hint_margin_left"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/selectDate_hint_text_size"
+                    android:layout_toEndOf="@+id/endDateHeadline"
+                    android:layout_centerVertical="true"
+                    android:hint="@string/select_date"
+                    />
+                <ImageButton
+                    android:id="@+id/BtnPickEndDate"
+                    android:layout_width="@dimen/calender_button_width"
+                    android:layout_height="@dimen/calender_button_height"
+                    android:textAllCaps="false"
+                    android:src="@drawable/calendar"
+                    android:background="@color/fui_transparent"
+                    android:layout_alignParentEnd="true"
+                    />
+            </RelativeLayout>
+<!--ITEM Coverage Details-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/formCoverageDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/form_input_text_margin_horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="@string/coverage_details"
+                app:boxStrokeColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:visibility="gone"
+                tools:visibility="visible"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:drawableStart = "@drawable/label"
+                    android:textColor="@color/black"
+                    android:scrollbars="vertical"
+                    android:maxLines="5"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+<!--ITEM Warranty Number ID-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/formWarrantyIDNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/form_input_text_margin_horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="@string/warranty_id_number"
+                app:boxStrokeColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:visibility="gone"
+                tools:visibility="visible"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapCharacters"
+                    android:drawableStart ="@drawable/lock"
+                    android:textColor="@color/black"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+<!--ITEM Warranty Provider Phone Number-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/formWarrantyProviderNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/form_input_text_margin_horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="@string/warranty_provider_number"
+                app:boxStrokeColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:visibility="gone"
+                tools:visibility="visible"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number|phone"
+                    android:drawableStart ="@drawable/service"
+                    android:textColor="@color/black"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+<!--ITEM Submit Button-->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/BTNsubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/submit"
+                android:layout_gravity="center"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/colorPrimaryDark"
+                />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
     <!--END: NestedScrollView-->
@@ -102,10 +375,5 @@
         app:tint="@color/white"
         app:layout_anchor="@id/form_IMG_product"
         app:layout_anchorGravity="bottom|right|end"
-        android:contentDescription="@string/upload_image" />
-
-
-
-
-
+        android:contentDescription="@string/upload_image"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

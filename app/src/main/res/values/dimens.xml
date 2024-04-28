@@ -35,7 +35,13 @@
     <dimen name="headline_text_size">30sp</dimen>
     <dimen name="headline_text_marginVertical">16dp</dimen>
     <dimen name="product_image_height">300dp</dimen>
-    <dimen name="form_input_text_margin">12dp</dimen>
+    <dimen name="form_input_text_margin_horizontal">12dp</dimen>
+    <dimen name="form_input_text_margin_vertical">4dp</dimen>
+    <dimen name="autoCompleteTextView_padding">45dp</dimen>
+    <dimen name="hint_margin_left">8dp</dimen>
+    <dimen name="calender_button_width">55dp</dimen>
+    <dimen name="calender_button_height">55dp</dimen>
+    <dimen name="selectDate_hint_text_size">20sp</dimen>
 
 
 </resources>

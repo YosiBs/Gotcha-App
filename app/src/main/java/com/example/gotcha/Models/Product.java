@@ -30,13 +30,22 @@ public class Product {
     private String serialNumber = "" ; // Serial number of the product (if applicable).
     private String notes = "" ; // Any additional notes about the product.
     private boolean hasWarranty ;
-    private Warranty warranty;
+    private Warranty warranty = new Warranty();
     public Product(){
 
     }
 
     public boolean isHasWarranty() {
         return hasWarranty;
+    }
+
+    public Warranty getWarranty() {
+        return warranty;
+    }
+
+    public Product setWarranty(Warranty warranty) {
+        this.warranty = warranty;
+        return this;
     }
 
     public Product setHasWarranty(boolean hasWarranty) {

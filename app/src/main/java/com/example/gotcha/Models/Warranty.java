@@ -1,16 +1,20 @@
 package com.example.gotcha.Models;
 
+import android.util.Log;
+
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class Warranty {
 
-    private String warrantyProvider;   // Name of the warranty provider (e.g., manufacturer, third-party service).
-    private Date startDate;   // Start date of the warranty coverage.
-    private Date endDate;   // End date of the warranty coverage.
-    private int warrantyLength; //In Days
-    private String coverageDetails;   // Details of the warranty coverage (e.g., what's covered, exclusions).private String warrantyType;   // Type of warranty (e.g., manufacturer's warranty, extended warranty).
-    private String warrantyNumber; // Warranty identification number (if applicable).
-    private String warrantyContact;   // Contact information for warranty inquiries or claims.
+    private String warrantyProvider = "";   // Name of the warranty provider (e.g., manufacturer, third-party service).
+    private Date startDate = null;   // Start date of the warranty coverage.
+    private Date endDate = null;   // End date of the warranty coverage.
+    private int warrantyLength = 0; //In Days
+    private String coverageDetails = "";   // Details of the warranty coverage (e.g., what's covered, exclusions).private String warrantyType;   // Type of warranty (e.g., manufacturer's warranty, extended warranty).
+    private String warrantyNumber = ""; // Warranty identification number (if applicable).
+    private String warrantyContact = "";   // Contact information for warranty inquiries or claims.
 
     public Warranty(){
 
@@ -77,5 +81,10 @@ public class Warranty {
     public Warranty setWarrantyContact(String warrantyContact) {
         this.warrantyContact = warrantyContact;
         return this;
+    }
+    public void calcWarrantyLenInDays(){
+        long daysBetween = TimeUnit.DAYS.convert(endDate.getTime() - startDate.getTime(), TimeUnit.MILLISECONDS);
+        Log.d("ddd", "Days: " + daysBetween);
+
     }
 }

@@ -34,7 +34,7 @@ picasso-library = {module = "com.squareup.picasso:picasso" ,version.ref = "picas
 #Form (addItem)
 form-materials = {module = "com.google.android.material:material", version.ref = "materialVersion"}
 coordinator-layout = {module = "androidx.coordinatorlayout:coordinatorlayout" , version.ref = "corrdinatorLayoutVersion"}
-
+#Material 3 Core
 
 
 [plugins]

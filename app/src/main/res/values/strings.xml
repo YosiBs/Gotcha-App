@@ -9,14 +9,20 @@
     <string name="upload_image">\ Upload Image</string>
 
     <string name="done">done</string>
-
-
     <!--maybe map?-->
     <string name="purchase_location">Purchase Location</string>
     <!--calender-->
-    <string name="purchase_date">Purchase Date</string>
+    <string name="purchase_date">Purchase Date:</string>
     <!--dropbox-->
     <string name="category">Select Category</string>
+    <string name="select_date">Select Date</string>
+    <string name="warranty_provider">\ Warranty Provider</string>
+    <string name="warranty_end_date">Warranty End Date:</string>
+    <string name="warranty_start_date">Warranty Start Date:</string>
+    <string name="submit">SUBMIT</string>
+    <string name="coverage_details">\ Coverage Details</string>
+    <string name="warranty_id_number">\ Warranty ID Number</string>
+    <string name="warranty_provider_number">\ Warranty Provider Number</string>
 
 
     <string-array name="categories">
