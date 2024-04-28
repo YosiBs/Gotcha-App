@@ -47,7 +47,7 @@
 
 <!--ITEM Price-->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/formItemPrice"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/form_input_text_margin_horizontal"
@@ -58,6 +58,7 @@
                 android:textColorHint="@color/grey"
                 >
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/formItemPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
@@ -102,16 +103,16 @@
                     android:layout_height="wrap_content"
                     android:text="@string/purchase_date"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/pick_date_text_size"
                     android:layout_centerVertical="true"
                     />
                 <TextView
-                    android:id="@+id/dateText"
+                    android:id="@+id/purchaseDateText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/selectDate_hint_text_size"
                     android:layout_toEndOf="@+id/dateHeadline"
                     android:layout_centerVertical="true"
                     android:hint="@string/select_date"
@@ -139,6 +140,7 @@
                 android:textColorHint="@color/grey"
                 >
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/formSerialNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapCharacters"
@@ -158,6 +160,7 @@
                 android:textColorHint="@color/grey"
                 >
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/formItemNotes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
@@ -193,6 +196,7 @@
                 tools:visibility="visible"
                 >
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/formWarrantyProviderText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
@@ -216,7 +220,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/warranty_start_date"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/pick_date_text_size"
                     android:layout_centerVertical="true"
                     />
                 <TextView
@@ -256,7 +260,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/warranty_end_date"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/pick_date_text_size"
                     android:layout_centerVertical="true"
                     />
                 <TextView
@@ -295,6 +299,7 @@
                 tools:visibility="visible"
                 >
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/formCoverageDetailsText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
@@ -319,6 +324,7 @@
                 tools:visibility="visible"
                 >
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/formWarrantyIDNumberText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapCharacters"
@@ -341,6 +347,7 @@
                 tools:visibility="visible"
                 >
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/formWarrantyProviderNumberText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number|phone"

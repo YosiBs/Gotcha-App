@@ -41,7 +41,8 @@
     <dimen name="hint_margin_left">8dp</dimen>
     <dimen name="calender_button_width">55dp</dimen>
     <dimen name="calender_button_height">55dp</dimen>
-    <dimen name="selectDate_hint_text_size">20sp</dimen>
+    <dimen name="selectDate_hint_text_size">14sp</dimen>
+    <dimen name="pick_date_text_size">16sp</dimen>
 
 
 </resources>

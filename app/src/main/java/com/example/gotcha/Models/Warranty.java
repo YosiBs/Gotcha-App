@@ -3,28 +3,43 @@ package com.example.gotcha.Models;
 import android.util.Log;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class Warranty {
 
     private String warrantyProvider = "";   // Name of the warranty provider (e.g., manufacturer, third-party service).
-    private Date startDate = null;   // Start date of the warranty coverage.
-    private Date endDate = null;   // End date of the warranty coverage.
-    private int warrantyLength = 0; //In Days
+    private LocalDate startDate = null;   // Start date of the warranty coverage.
+    private LocalDate endDate = null;   // End date of the warranty coverage.
+    private long warrantyLength = 0; //In Days
     private String coverageDetails = "";   // Details of the warranty coverage (e.g., what's covered, exclusions).private String warrantyType;   // Type of warranty (e.g., manufacturer's warranty, extended warranty).
     private String warrantyNumber = ""; // Warranty identification number (if applicable).
     private String warrantyContact = "";   // Contact information for warranty inquiries or claims.
+
+    @Override
+    public String toString() {
+        return "\n    Warranty{" +
+                "\n     warrantyProvider='" + warrantyProvider + '\'' +
+                ", \n       startDate=" + startDate +
+                ", \n       endDate=" + endDate +
+                ", \n       warrantyLength=" + warrantyLength +
+                ", \n       coverageDetails='" + coverageDetails + '\'' +
+                ", \n       warrantyNumber='" + warrantyNumber + '\'' +
+                ", \n       warrantyContact='" + warrantyContact + '\'' +
+                '}';
+    }
 
     public Warranty(){
 
     }
 
-    public int getWarrantyLength() {
+    public long getWarrantyLength() {
         return warrantyLength;
     }
 
-    public Warranty setWarrantyLength(int warrantyLength) {
+    public Warranty setWarrantyLength(long warrantyLength) {
         this.warrantyLength = warrantyLength;
         return this;
     }
@@ -38,20 +53,20 @@ public class Warranty {
         return this;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public Warranty setStartDate(Date startDate) {
+    public Warranty setStartDate(LocalDate startDate) {
         this.startDate = startDate;
         return this;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public Warranty setEndDate(Date endDate) {
+    public Warranty setEndDate(LocalDate endDate) {
         this.endDate = endDate;
         return this;
     }
@@ -82,9 +97,9 @@ public class Warranty {
         this.warrantyContact = warrantyContact;
         return this;
     }
-    public void calcWarrantyLenInDays(){
-        long daysBetween = TimeUnit.DAYS.convert(endDate.getTime() - startDate.getTime(), TimeUnit.MILLISECONDS);
-        Log.d("ddd", "Days: " + daysBetween);
-
+    public long calcWarrantyLenInDays(){
+        LocalDate currentDate = LocalDate.now();
+        long remainingWarranty = ChronoUnit.DAYS.between(currentDate, endDate);
+        return remainingWarranty;
     }
 }

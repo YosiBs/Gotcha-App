@@ -21,6 +21,15 @@ public class User {
         this.productList = new ArrayList<Product>();
     }
 
+    public ArrayList<Product> getProductList() {
+        return productList;
+    }
+
+    public User setProductList(ArrayList<Product> productList) {
+        this.productList = productList;
+        return this;
+    }
+
     public String getUid() {
         return uid;
     }

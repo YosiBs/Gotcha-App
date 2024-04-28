@@ -1,5 +1,6 @@
 package com.example.gotcha.Models;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Product {
@@ -25,14 +26,27 @@ public class Product {
     private String productName = "";  // Name of the product.
     private CategoryType category = CategoryType.NA ; // Category of the product (e.g., electronics, appliances).
     private double price = 0.0 ; // Price of the product.
-    private Date purchaseDate ; // Date when the product was purchased.
-    private String purchaseLocation = "" ; // Location where the product was purchased.
+    private LocalDate purchaseDate ; // Date when the product was purchased.
     private String serialNumber = "" ; // Serial number of the product (if applicable).
     private String notes = "" ; // Any additional notes about the product.
     private boolean hasWarranty ;
     private Warranty warranty = new Warranty();
     public Product(){
 
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "\n    productName='" + productName + '\'' +
+                ", \n   category=" + category +
+                ", \n   price=" + price +
+                ", \n   purchaseDate=" + purchaseDate +
+                ", \n   serialNumber='" + serialNumber + '\'' +
+                ", \n   notes='" + notes + '\'' +
+                ", \n   hasWarranty=" + hasWarranty +
+                ", \n   warranty=" + warranty.toString() +
+                '}';
     }
 
     public boolean isHasWarranty() {
@@ -80,21 +94,14 @@ public class Product {
         return this;
     }
 
-    public Date getPurchaseDate() {
+    public LocalDate getPurchaseDate() {
+
         return purchaseDate;
     }
 
-    public Product setPurchaseDate(Date purchaseDate) {
+    public Product setPurchaseDate(LocalDate purchaseDate) {
+
         this.purchaseDate = purchaseDate;
-        return this;
-    }
-
-    public String getPurchaseLocation() {
-        return purchaseLocation;
-    }
-
-    public Product setPurchaseLocation(String purchaseLocation) {
-        this.purchaseLocation = purchaseLocation;
         return this;
     }
 
