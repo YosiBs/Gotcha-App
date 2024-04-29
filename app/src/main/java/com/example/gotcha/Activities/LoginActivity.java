@@ -1,5 +1,7 @@
 package com.example.gotcha.Activities;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.gotcha.Logics.FirebaseManager;
 import com.example.gotcha.Models.CurrentUser;
 import com.example.gotcha.Models.User;
 import com.example.gotcha.R;
@@ -75,9 +78,9 @@ public class LoginActivity extends AppCompatActivity {
             loadLoggedInUser();
         }
         Log.d("ggg", "User: " + firebaseUser.getEmail() + " (func: onCreate)");
-       //initCurrentUser();
-        checkIfUserInDatabase();
+        initCurrentUser();
 
+        checkIfUserInDatabase();
         goToMainActivity();
 
     }
@@ -90,46 +93,60 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private boolean checkIfUserInDatabase() {
-        //1. get current user
-        //2. check if the user is in the DB
-        //3. if not : add him to the DB and return
-
-
-        // 1
+    private void checkIfUserInDatabase() {
+        // 1 - authentication part
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currentUser != null){
-            //2
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference usersRef = database.getReference("Users").child(currentUser.getUid());
+            User user = CurrentUser.getInstance().getUserProfile();
 
-            // Check if the user's UID exists in the "Users" node
-            usersRef.child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            //2 -database part
+            String userId = user.getUid();
+            FirebaseManager.getInstance().checkUserExistence(userId, new FirebaseManager.OnUserExistenceListener() {
+
                 @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()) {
+                public void onUserExists(boolean exists) {
+                    if (exists) {
                         // User exists in the database
-                        // You can perform any necessary actions here
-                        Log.d("Database", "User exists in the database");
-
-                        // Optionally, you can retrieve and process user data here
-                        // User user = dataSnapshot.getValue(User.class);
+                        Log.d(TAG, "User exists in the database");
+                        FirebaseManager.getInstance().loadUserDetails(userId, new FirebaseManager.OnUserLoadListener() {
+                            @Override
+                            public void onUserLoaded(User user) {
+                                // User details loaded successfully
+                                Log.d(TAG, "User details loaded: " + user.toString());
+                                // Now you can use the user object as needed
+                            }
+                            @Override
+                            public void onUserLoadFailed(String errorMessage) {
+                                // Error occurred while loading user details
+                                Log.e(TAG, "Error loading user details: " + errorMessage);
+                            }
+                        });
                     } else {
                         // User does not exist in the database
-                        // Add the user to the database
-                        //3
-                        createNewUser();
+                        Log.d(TAG, "User does not exist in the database");
+                        FirebaseManager.getInstance().addNewUser(userId, user, new FirebaseManager.OnUserAddListener() {
+                            @Override
+                            public void onUserAdded() {
+                                // User added successfully
+                                Log.d(TAG, "User added to the database");
+                            }
+
+                            @Override
+                            public void onUserExists() {
+                                // User already exists in the database
+                                Log.d(TAG, "User already exists in the database");
+                            }
+
+                            @Override
+                            public void onUserAddFailed(String errorMessage) {
+                                // Error occurred while adding user
+                                Log.e(TAG, "Error adding user: " + errorMessage);
+                            }
+                        });
                     }
                 }
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    // Handle potential error
-                    Log.e("FirebaseError", "Error checking user data: " + databaseError.getMessage());
-                }
             });
-
         }
-        return true;
     }
 
 
@@ -185,7 +202,6 @@ public class LoginActivity extends AppCompatActivity {
 
         databaseRef = FirebaseDatabase.getInstance().getReference("Users");
         DatabaseReference userRef = databaseRef.child(firebaseUser.getUid());
-        int x = 2;
         // Add a listener to retrieve the user data
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -204,7 +220,7 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d("UserDetails", "User not found");
                     createNewUser();
                 }
-                goToMainActivity();
+                //goToMainActivity();
             }
 
             @Override

@@ -16,6 +16,7 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.gotcha.Logics.FirebaseManager;
 import com.example.gotcha.Models.CurrentUser;
 import com.example.gotcha.Models.Product;
 import com.example.gotcha.R;
@@ -110,13 +111,17 @@ public class AddItemFragment extends Fragment {
     }
 
     private void submitForm() {
-        createNewProduct();
-        // add product to productList (array)
+        Product product = createNewProduct();
+
         // update Database
+        FirebaseManager firebaseManager = FirebaseManager.getInstance();
         // go to product preview
+        String userId = CurrentUser.getInstance().getUserProfile().getUid();
+        firebaseManager.addNewProduct(userId, product);
+
     }
 
-    private void createNewProduct() {
+    private Product createNewProduct() {
         Product newProduct = new Product();
 
         boolean areProductEssentialsFilled = false;
@@ -144,8 +149,10 @@ public class AddItemFragment extends Fragment {
         String priceString = binding.formItemPrice.getText().toString();
         double price = 0.0; // Default value if parsing fails
         try {
-            price = Double.parseDouble(priceString);
-            newProduct.setPrice(price);
+            if(!priceString.isEmpty()){
+                price = Double.parseDouble(priceString);
+                newProduct.setPrice(price);
+            }
         } catch (NumberFormatException e) {
             binding.formItemPrice.setError("Item price should be x.y");
         }
@@ -228,17 +235,12 @@ public class AddItemFragment extends Fragment {
             // Show error message or toast indicating that all essential fields must be filled
             Toast.makeText(requireContext(), "Please fill all essential fields", Toast.LENGTH_SHORT).show();
         } else {
-            // All essential fields are filled, proceed with creating the product
-            // Create the product here
-            //TODO: add the product to the array
-            //CurrentUser.getInstance().getUserProfile().getProductList().add(newProduct);
+            CurrentUser.getInstance().getUserProfile().getProductList().add(newProduct);
             Log.d("ddd", "Output:\n" + newProduct.toString());
+            Log.d("ddd", "Output2:\n" + CurrentUser.getInstance().getUserProfile().getProductList().toString());
         }
 
-
-
-
-
+        return newProduct;
     }
 
     private void initCategoryDropBox() {
