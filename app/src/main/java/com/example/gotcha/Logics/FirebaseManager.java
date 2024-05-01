@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.gotcha.Models.CurrentUser;
 import com.example.gotcha.Models.Product;
 import com.example.gotcha.Models.User;
 import com.google.firebase.database.DataSnapshot;
@@ -13,6 +14,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class FirebaseManager {
     private static final String USERS_NODE = "Users";
@@ -64,9 +67,6 @@ public class FirebaseManager {
 
     public void checkUserExistence(String userId, final OnUserExistenceListener listener) {
 
-        Log.d("ddd", "userId = " + userId);
-        Log.d("ddd", "HERE");
-
         DatabaseReference userRef = databaseReference.child(USERS_NODE).child(userId);
 
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -99,6 +99,18 @@ public class FirebaseManager {
                 if (dataSnapshot.exists()) {
                     // User exists, parse the data and pass it to the listener
                     User user = dataSnapshot.getValue(User.class);
+                    CurrentUser.getInstance().setUserProfile(user);
+
+                    // Check if the user has productList node
+                    if (dataSnapshot.hasChild(PRODUCTS_NODE)) {
+                        // User has productList, retrieve it
+                        ArrayList<Product> productList = new ArrayList<>();
+                        for (DataSnapshot productSnapshot : dataSnapshot.child(PRODUCTS_NODE).getChildren()) {
+                            Product product = productSnapshot.getValue(Product.class);
+                            productList.add(product);
+                        }
+                        CurrentUser.getInstance().getUserProfile().setProductList(productList);
+                    }
                     listener.onUserLoaded(user);
                 } else {
                     // User does not exist

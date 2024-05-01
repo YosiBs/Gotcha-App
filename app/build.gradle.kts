@@ -59,4 +59,7 @@ dependencies {
     //Form (addItem)
     implementation (libs.form.materials)
     implementation (libs.coordinator.layout)
+    //Circle Image
+    implementation (libs.circle.image)
+
 }

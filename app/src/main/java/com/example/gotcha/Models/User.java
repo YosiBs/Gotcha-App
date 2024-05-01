@@ -10,7 +10,7 @@ public class User {
     private String name;
     private String image;
     private boolean isRegistered;
-    private ArrayList<Product> productList;
+    private ArrayList<Product> productList = new ArrayList<Product>();
     public User(){
 
     }
@@ -18,7 +18,6 @@ public class User {
         this.uid = uid;
         this.name = name;
         this.image = image;
-        this.productList = new ArrayList<Product>();
     }
 
     public ArrayList<Product> getProductList() {
@@ -69,10 +68,10 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "uid='" + uid + '\'' +
-                ", Name='" + name + '\'' +
-                ", image='" + image + '\'' +
-                ", isRegistered=" + isRegistered +
+                " \n    uid='" + uid + '\'' +
+                ",\n     Name='" + name + '\'' +
+                ",\n     image='" + image + '\'' +
+                ",\n     isRegistered=" + isRegistered +
                 '}';
     }
 }

@@ -50,17 +50,14 @@ public class AddItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_add_item, container, false);
         binding = FragmentAddItemBinding.inflate(inflater, container, false);
-
-
-        initViews(view);
+        initViews();
         return binding.getRoot();
     }
 
 
 
-    private void initViews(View view) {
+    private void initViews() {
         binding.BtnPickDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,19 +109,17 @@ public class AddItemFragment extends Fragment {
 
     private void submitForm() {
         Product product = createNewProduct();
-
         // update Database
         FirebaseManager firebaseManager = FirebaseManager.getInstance();
         // go to product preview
         String userId = CurrentUser.getInstance().getUserProfile().getUid();
         firebaseManager.addNewProduct(userId, product);
-
     }
 
     private Product createNewProduct() {
         Product newProduct = new Product();
 
-        boolean areProductEssentialsFilled = false;
+        boolean areProductEssentialsFilled ;
         boolean areWarrantyEssentialsFilled = false;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 //<!--ITEM NAME-->
@@ -165,7 +160,9 @@ public class AddItemFragment extends Fragment {
         String purchaseDateText = binding.purchaseDateText.getText().toString();
         if(!purchaseDateText.isEmpty()){
             LocalDate purchaseDate = LocalDate.parse(purchaseDateText, formatter);
-            newProduct.setPurchaseDate(purchaseDate);
+            String purchaseDateString = purchaseDate.toString();
+
+            newProduct.setPurchaseDate(purchaseDateString);
         }
 
 //<!--ITEM Notes-->
@@ -194,13 +191,18 @@ public class AddItemFragment extends Fragment {
             String startDateText = binding.startDateText.getText().toString();
             if(!startDateText.isEmpty()){
                 LocalDate startDate = LocalDate.parse(startDateText, formatter);
-                newProduct.getWarranty().setStartDate(startDate);
+                String startDateString = startDate.toString();
+
+                newProduct.getWarranty().setStartDate(startDateString);
+
+
             }
 //<!--Warranty End Date-->
             String endDateText = binding.endDateText.getText().toString();
             if(!endDateText.isEmpty()){
                 LocalDate endDate = LocalDate.parse(endDateText, formatter);
-                newProduct.getWarranty().setEndDate(endDate);
+                String endDateString = endDate.toString();
+                newProduct.getWarranty().setEndDate(endDateString);
             }
 //<!--Warranty Remaining Length in Days-->
             if(newProduct.getWarranty().getEndDate() != null){
@@ -235,9 +237,13 @@ public class AddItemFragment extends Fragment {
             // Show error message or toast indicating that all essential fields must be filled
             Toast.makeText(requireContext(), "Please fill all essential fields", Toast.LENGTH_SHORT).show();
         } else {
+            Log.d("ddd", "\n\n---------------------------------------");
+            Log.d("ddd", "\n-getProductList: "+CurrentUser.getInstance().getUserProfile().getProductList());
+            Log.d("ddd", "\n\n---------------------------------------");
+
             CurrentUser.getInstance().getUserProfile().getProductList().add(newProduct);
-            Log.d("ddd", "Output:\n" + newProduct.toString());
-            Log.d("ddd", "Output2:\n" + CurrentUser.getInstance().getUserProfile().getProductList().toString());
+            Log.d("ddd", "#2");
+            Log.d("ddd", "Product List:\n" + CurrentUser.getInstance().getUserProfile().getProductList().toString());
         }
 
         return newProduct;

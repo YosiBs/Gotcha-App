@@ -14,7 +14,7 @@ gmsPlayServicesAuth = "20.7.0"
 picasso = "2.71828"
 materialVersion = "1.2.0"
 corrdinatorLayoutVersion = "1.1.0"
-
+circleImageVersion = "3.1.0"
 
 
 [libraries]
@@ -35,6 +35,9 @@ picasso-library = {module = "com.squareup.picasso:picasso" ,version.ref = "picas
 form-materials = {module = "com.google.android.material:material", version.ref = "materialVersion"}
 coordinator-layout = {module = "androidx.coordinatorlayout:coordinatorlayout" , version.ref = "corrdinatorLayoutVersion"}
 #Material 3 Core
+#Circle Image:
+circle-image = {module = "de.hdodenhof:circleimageview" , version.ref = "circleImageVersion"}
+
 
 
 [plugins]

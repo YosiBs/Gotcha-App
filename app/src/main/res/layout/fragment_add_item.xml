@@ -44,6 +44,26 @@
                     android:textColor="@color/black"
                     />
             </com.google.android.material.textfield.TextInputLayout>
+<!--ITEM SerialNumber-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/form_input_text_margin_horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="@string/serial_number"
+                app:boxStrokeColor="@color/black"
+                android:textColorHint="@color/grey"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/formSerialNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapCharacters"
+                    android:drawableStart = "@drawable/barcode"
+                    android:textColor="@color/black"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
 
 <!--ITEM Price-->
             <com.google.android.material.textfield.TextInputLayout
@@ -128,26 +148,7 @@
                     android:layout_alignParentEnd="true"
                     />
             </RelativeLayout>
-<!--ITEM SerialNumber-->
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/form_input_text_margin_horizontal"
-                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="@string/serial_number"
-                app:boxStrokeColor="@color/black"
-                android:textColorHint="@color/grey"
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/formSerialNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textCapCharacters"
-                    android:drawableStart = "@drawable/barcode"
-                    android:textColor="@color/black"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
+
 <!--ITEM Note-->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"

@@ -75,12 +75,14 @@ public class LoginActivity extends AppCompatActivity {
         }else{
             //user already logged in
             Log.d("ggg", "user already logged in (func: onCreate)");
-            loadLoggedInUser();
+            initCurrentUser();
+            Log.d("ddd", "Details: (Login)" + "\n-instance: "+CurrentUser.getInstance());
+            Log.d("ddd", "Details: (Login)" + "\n-getUserProfile: "+ CurrentUser.getInstance().getUserProfile());
+            Log.d("ddd", "Details: (Login)" + "\n-getProductList: "+CurrentUser.getInstance().getUserProfile().getProductList());
+            checkIfUserInDatabase();
         }
         Log.d("ggg", "User: " + firebaseUser.getEmail() + " (func: onCreate)");
-        initCurrentUser();
 
-        checkIfUserInDatabase();
         goToMainActivity();
 
     }
@@ -112,7 +114,10 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onUserLoaded(User user) {
                                 // User details loaded successfully
-                                Log.d(TAG, "User details loaded: " + user.toString());
+                                Log.d("TAG", "User details loaded: " + user.toString());
+                                Log.d("ddd", "User details loaded: " + user.toString());
+
+
                                 // Now you can use the user object as needed
                             }
                             @Override

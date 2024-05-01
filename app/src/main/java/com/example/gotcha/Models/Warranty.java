@@ -11,8 +11,8 @@ import java.util.concurrent.TimeUnit;
 public class Warranty {
 
     private String warrantyProvider = "";   // Name of the warranty provider (e.g., manufacturer, third-party service).
-    private LocalDate startDate = null;   // Start date of the warranty coverage.
-    private LocalDate endDate = null;   // End date of the warranty coverage.
+    private String startDate = null;   // Start date of the warranty coverage.
+    private String endDate = null;   // End date of the warranty coverage.
     private long warrantyLength = 0; //In Days
     private String coverageDetails = "";   // Details of the warranty coverage (e.g., what's covered, exclusions).private String warrantyType;   // Type of warranty (e.g., manufacturer's warranty, extended warranty).
     private String warrantyNumber = ""; // Warranty identification number (if applicable).
@@ -53,20 +53,20 @@ public class Warranty {
         return this;
     }
 
-    public LocalDate getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public Warranty setStartDate(LocalDate startDate) {
+    public Warranty setStartDate(String startDate) {
         this.startDate = startDate;
         return this;
     }
 
-    public LocalDate getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public Warranty setEndDate(LocalDate endDate) {
+    public Warranty setEndDate(String endDate) {
         this.endDate = endDate;
         return this;
     }
@@ -99,7 +99,8 @@ public class Warranty {
     }
     public long calcWarrantyLenInDays(){
         LocalDate currentDate = LocalDate.now();
-        long remainingWarranty = ChronoUnit.DAYS.between(currentDate, endDate);
+        LocalDate endDateLocal = LocalDate.parse(endDate);
+        long remainingWarranty = ChronoUnit.DAYS.between(currentDate, endDateLocal);
         return remainingWarranty;
     }
 }

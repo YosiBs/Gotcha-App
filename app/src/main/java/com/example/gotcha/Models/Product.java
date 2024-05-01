@@ -26,7 +26,7 @@ public class Product {
     private String productName = "";  // Name of the product.
     private CategoryType category = CategoryType.NA ; // Category of the product (e.g., electronics, appliances).
     private double price = 0.0 ; // Price of the product.
-    private LocalDate purchaseDate ; // Date when the product was purchased.
+    private String purchaseDate ; // Date when the product was purchased.
     private String serialNumber = "" ; // Serial number of the product (if applicable).
     private String notes = "" ; // Any additional notes about the product.
     private boolean hasWarranty ;
@@ -94,12 +94,12 @@ public class Product {
         return this;
     }
 
-    public LocalDate getPurchaseDate() {
+    public String getPurchaseDate() {
 
         return purchaseDate;
     }
 
-    public Product setPurchaseDate(LocalDate purchaseDate) {
+    public Product setPurchaseDate(String purchaseDate) {
 
         this.purchaseDate = purchaseDate;
         return this;
