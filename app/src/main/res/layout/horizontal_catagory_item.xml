@@ -19,7 +19,7 @@
         android:layout_marginEnd="@dimen/category_end_margin"
         android:layout_marginVertical="@dimen/category_end_margin"
         android:elevation="@dimen/category_elevation"
-        app:cardCornerRadius="@dimen/image_corner_radius"
+        app:cardCornerRadius="@dimen/preview_corner_radius"
         app:cardElevation="@dimen/category_elevation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

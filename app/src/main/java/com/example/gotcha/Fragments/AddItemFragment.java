@@ -1,14 +1,24 @@
 package com.example.gotcha.Fragments;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -22,7 +32,14 @@ import com.example.gotcha.Models.Product;
 import com.example.gotcha.R;
 import com.example.gotcha.databinding.ActivityMainBinding;
 import com.example.gotcha.databinding.FragmentAddItemBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -33,6 +50,12 @@ import java.util.Locale;
 public class AddItemFragment extends Fragment {
 
     private FragmentAddItemBinding binding;
+    Uri imageUri ;
+    StorageReference storageReference;
+    ProgressDialog progressDialog;
+    private static final int IMAGE_REQUEST = 2;
+    private String productImgUrl;
+    private Product newProduct = new Product();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +81,12 @@ public class AddItemFragment extends Fragment {
 
 
     private void initViews() {
+        binding.floatingBTNUploadImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectImage();
+            }
+        });
         binding.BtnPickDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,6 +136,24 @@ public class AddItemFragment extends Fragment {
 
     }
 
+    private void selectImage() {
+        Intent intent = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        //intent.setType("images/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, IMAGE_REQUEST);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == IMAGE_REQUEST && resultCode == RESULT_OK){
+            imageUri = data.getData();
+            uploadImage();
+            binding.formIMGProduct.setImageURI(imageUri);
+        }
+
+    }
+
     private void submitForm() {
         Product product = createNewProduct();
         // update Database
@@ -117,11 +164,14 @@ public class AddItemFragment extends Fragment {
     }
 
     private Product createNewProduct() {
-        Product newProduct = new Product();
 
         boolean areProductEssentialsFilled ;
         boolean areWarrantyEssentialsFilled = false;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+//<!--ITEM IMAGE-->
+        if(imageUri != null){
+            newProduct.setImageUriString(productImgUrl);
+        }
 //<!--ITEM NAME-->
         String itemName = String.valueOf(binding.formItemName.getText().toString().trim());
         if (itemName.isEmpty()) {
@@ -192,10 +242,7 @@ public class AddItemFragment extends Fragment {
             if(!startDateText.isEmpty()){
                 LocalDate startDate = LocalDate.parse(startDateText, formatter);
                 String startDateString = startDate.toString();
-
                 newProduct.getWarranty().setStartDate(startDateString);
-
-
             }
 //<!--Warranty End Date-->
             String endDateText = binding.endDateText.getText().toString();
@@ -204,9 +251,10 @@ public class AddItemFragment extends Fragment {
                 String endDateString = endDate.toString();
                 newProduct.getWarranty().setEndDate(endDateString);
             }
-//<!--Warranty Remaining Length in Days-->
+//<!--Warranty Total Length in Days-->
             if(newProduct.getWarranty().getEndDate() != null){
-                newProduct.getWarranty().setWarrantyLength(newProduct.getWarranty().calcWarrantyLenInDays());
+                LocalDate startDate = LocalDate.parse(startDateText, formatter);
+                newProduct.getWarranty().setWarrantyLength(newProduct.getWarranty().calcWarrantyReminder(startDate));
             }
 //<!--Warranty Coverage Details-->
             String coverageDetails = String.valueOf(binding.formCoverageDetailsText.getText().toString().trim());
@@ -237,16 +285,49 @@ public class AddItemFragment extends Fragment {
             // Show error message or toast indicating that all essential fields must be filled
             Toast.makeText(requireContext(), "Please fill all essential fields", Toast.LENGTH_SHORT).show();
         } else {
-            Log.d("ddd", "\n\n---------------------------------------");
-            Log.d("ddd", "\n-getProductList: "+CurrentUser.getInstance().getUserProfile().getProductList());
-            Log.d("ddd", "\n\n---------------------------------------");
-
             CurrentUser.getInstance().getUserProfile().getProductList().add(newProduct);
-            Log.d("ddd", "#2");
-            Log.d("ddd", "Product List:\n" + CurrentUser.getInstance().getUserProfile().getProductList().toString());
         }
-
         return newProduct;
+    }
+
+    private void uploadImage() {
+        progressDialog = new ProgressDialog(requireContext());
+        progressDialog.setTitle("Uploading Image....");
+        progressDialog.show();
+
+
+
+        Log.d("ddd", "HERE 1  " + imageUri);
+
+        if(imageUri != null){
+
+            storageReference = FirebaseStorage.getInstance().getReference().child("uploads").child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
+            storageReference.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String url = uri.toString();
+                            productImgUrl = uri.toString();
+
+                            Log.d("ddd", "URL: " + url);
+                            if(progressDialog.isShowing()){
+                                progressDialog.dismiss();
+                            }
+                            Toast.makeText(requireContext(), "image Uploaded", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            });
+        }
+    }
+
+    private String getFileExtension(Uri uri){
+
+        ContentResolver contentResolver = requireContext().getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
     private void initCategoryDropBox() {

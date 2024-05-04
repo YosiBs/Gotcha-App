@@ -41,6 +41,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.firebase.storage)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -61,5 +62,7 @@ dependencies {
     implementation (libs.coordinator.layout)
     //Circle Image
     implementation (libs.circle.image)
-
+    //Glide
+    implementation(libs.glide.bumptech)
+    annotationProcessor(libs.glide.bumptech.annotation)
 }

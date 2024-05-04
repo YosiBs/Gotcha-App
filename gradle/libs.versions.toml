@@ -15,7 +15,9 @@ picasso = "2.71828"
 materialVersion = "1.2.0"
 corrdinatorLayoutVersion = "1.1.0"
 circleImageVersion = "3.1.0"
-
+googleServices = "4.4.1"
+firebaseStorage = "21.0.0"
+glideVersion = "4.12.0"
 
 [libraries]
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
@@ -37,6 +39,12 @@ coordinator-layout = {module = "androidx.coordinatorlayout:coordinatorlayout" , 
 #Material 3 Core
 #Circle Image:
 circle-image = {module = "de.hdodenhof:circleimageview" , version.ref = "circleImageVersion"}
+#firebase Storage:
+google-services = { group = "com.google.gms", name = "google-services", version.ref = "googleServices" }
+firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" }
+#Glide:
+glide-bumptech = {module = "com.github.bumptech.glide:glide" ,version.ref = "glideVersion"}
+glide-bumptech-annotation = {module = "com.github.bumptech.glide:compiler" ,version.ref = "glideVersion"}
 
 
 

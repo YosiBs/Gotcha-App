@@ -97,10 +97,9 @@ public class Warranty {
         this.warrantyContact = warrantyContact;
         return this;
     }
-    public long calcWarrantyLenInDays(){
-        LocalDate currentDate = LocalDate.now();
+    public long calcWarrantyReminder(LocalDate fromDate){
         LocalDate endDateLocal = LocalDate.parse(endDate);
-        long remainingWarranty = ChronoUnit.DAYS.between(currentDate, endDateLocal);
+        long remainingWarranty = ChronoUnit.DAYS.between(fromDate, endDateLocal);
         return remainingWarranty;
     }
 }

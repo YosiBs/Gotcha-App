@@ -1,83 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.cardview.widget.CardView
+    android:id="@+id/product_CARD_data"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/form_input_text_margin_horizontal"
+    app:cardCornerRadius="12dp"
+
+    >
+    
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="5"
 
 
-<!--CARD TO SHOW PRODUCT IMAGE (WILL BE IN +id/product_CARD_data)-->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/IMG_card_view"
-        android:layout_width="@dimen/preview_image_width"
-        android:layout_height="@dimen/preview_image_height"
-        android:elevation="@dimen/preview_image_elevation"
-        app:cardCornerRadius="@dimen/preview_corner_radius"
-        app:cardElevation="@dimen/preview_image_elevation"
-        android:layout_marginVertical="@dimen/preview_image_vertical_margin"
-        android:layout_marginStart="@dimen/preview_image_vertical_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/product_CARD_data"
-        app:layout_constraintStart_toStartOf="@id/product_CARD_data"
-        app:layout_constraintTop_toTopOf="parent"
         >
 
+<!-- Product Image -->
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/product_IMG"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_rowSpan="5"
             android:scaleType="centerCrop"
-            tools:src="@drawable/ic_launcher_background" />
-    </androidx.cardview.widget.CardView>
-
-    <!--CARD TO SHOW ALL THE DETAILS-->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/product_CARD_data"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/product_card_height"
-        android:layout_marginStart="@dimen/product_start_margin"
-        android:layout_marginEnd="@dimen/product_end_margin"
-        android:layout_marginVertical="@dimen/product_end_margin"
-        android:elevation="@dimen/product_elevation"
-        app:cardCornerRadius="@dimen/preview_corner_radius"
-        app:cardElevation="@dimen/product_elevation"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/IMG_card_view"
-        >
-
-
-        <GridLayout
-            android:layout_width="match_parent"
+            android:src="@color/colorPrimary"
+            android:layout_gravity="center_vertical"
+            />
+<!-- Product Name -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/product_LBL_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:columnCount="2"
-            android:rowCount="3"
-            android:alignmentMode="alignBounds"
-            android:columnOrderPreserved="false"
-            android:useDefaultMargins="true"
-            android:layout_gravity="center_vertical">
+            android:maxLines="2"
+            android:minLines="1"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:textSize="@dimen/title_text_size"
+            android:textStyle="bold"
+            tools:text="Product Name"
+            />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/product_LBL_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="@dimen/product_end_margin"
-                android:layout_marginTop="@dimen/product_end_margin"
-                android:layout_marginEnd="@dimen/product_end_margin"
-                android:maxLines="2"
-                android:minLines="2"
-                android:textSize="@dimen/title_text_size"
-                android:textStyle="bold"
-                tools:text="Product Name" />
+<!-- Product Price -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/product_LBL_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:maxLines="1"
+            android:minLines="1"
+            android:textSize="@dimen/title_text_size"
+            tools:text="Price: " />
+<!-- Product Price -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/product_LBL_warranty_exp_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:maxLines="1"
+            android:minLines="1"
+            android:textSize="@dimen/title_text_size"
+            tools:text="Warranty Exp Date: " />
+<!-- Product Progress Bar -->
+        <ProgressBar
+            android:id="@+id/PB_exp_time"
+            style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal.NoPadding"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            >
 
-        </GridLayout>
+
+        </ProgressBar>
+
+    </GridLayout>
 
 
 
-    </androidx.cardview.widget.CardView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

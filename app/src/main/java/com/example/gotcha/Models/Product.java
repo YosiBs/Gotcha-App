@@ -1,5 +1,7 @@
 package com.example.gotcha.Models;
 
+import android.net.Uri;
+
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -31,8 +33,18 @@ public class Product {
     private String notes = "" ; // Any additional notes about the product.
     private boolean hasWarranty ;
     private Warranty warranty = new Warranty();
+    private String imageUriString = "";
     public Product(){
 
+    }
+
+    public String getImageUriString() {
+        return imageUriString;
+    }
+
+    public Product setImageUriString(String imageUriString) {
+        this.imageUriString = imageUriString;
+        return this;
     }
 
     @Override

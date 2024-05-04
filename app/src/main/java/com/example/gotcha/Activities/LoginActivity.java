@@ -53,7 +53,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d("ggg", "------------START------------ (func: onCreate)");
-
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -76,15 +75,10 @@ public class LoginActivity extends AppCompatActivity {
             //user already logged in
             Log.d("ggg", "user already logged in (func: onCreate)");
             initCurrentUser();
-            Log.d("ddd", "Details: (Login)" + "\n-instance: "+CurrentUser.getInstance());
-            Log.d("ddd", "Details: (Login)" + "\n-getUserProfile: "+ CurrentUser.getInstance().getUserProfile());
-            Log.d("ddd", "Details: (Login)" + "\n-getProductList: "+CurrentUser.getInstance().getUserProfile().getProductList());
             checkIfUserInDatabase();
         }
         Log.d("ggg", "User: " + firebaseUser.getEmail() + " (func: onCreate)");
-
         goToMainActivity();
-
     }
 
     private void initCurrentUser() {
@@ -115,8 +109,6 @@ public class LoginActivity extends AppCompatActivity {
                             public void onUserLoaded(User user) {
                                 // User details loaded successfully
                                 Log.d("TAG", "User details loaded: " + user.toString());
-                                Log.d("ddd", "User details loaded: " + user.toString());
-
 
                                 // Now you can use the user object as needed
                             }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.HomeFragment"
-    android:background="#1976D2"
+    android:background="@color/grey"
     >
 
     <LinearLayout
@@ -13,39 +13,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:paddingVertical="8dp"
+
         >
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/image_placeholder"
+            android:layout_marginHorizontal="8dp"
             android:scaleType="centerCrop"
-            app:civ_border_width="2dp"
-            app:civ_border_color="@color/white" />
+            android:src="@drawable/image_placeholder"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="2dp" />
 
         <!-- TODO: Update blank fragment layout -->
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/home_frag_text_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="hello User"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="@dimen/user_name_text_size"
             android:layout_gravity="center"
-            />
-
+            android:textColor="@color/black"
+            android:textSize="@dimen/user_name_text_size"
+            android:textStyle="bold"
+            tools:text="hello User" />
     </LinearLayout>
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/home_LST_products"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        tools:listitem="@layout/horizontal_product_item"
         android:layout_marginTop="@dimen/product_list_marginTop"
-        />
-
-
+        tools:listitem="@layout/horizontal_product_item" />
 </FrameLayout>
