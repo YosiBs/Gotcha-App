@@ -1,5 +1,7 @@
 package com.example.gotcha.Fragments;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,8 +16,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.gotcha.Activities.MainActivity;
+import com.example.gotcha.Activities.ProductPreviewActivity;
 import com.example.gotcha.Adapters.ProductAdapter;
 import com.example.gotcha.Interfaces.CallBack_Product;
+import com.example.gotcha.Logics.FirebaseManager;
 import com.example.gotcha.Models.CurrentUser;
 import com.example.gotcha.Models.Product;
 import com.example.gotcha.Models.User;
@@ -46,16 +51,31 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        loadProductList();
 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public void onResume() {
+        super.onResume();
+        loadProductList();
+
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false);
+
         initViews();
+
         return binding.getRoot();
     }
 
@@ -66,12 +86,19 @@ public class HomeFragment extends Fragment {
     }
 
     private void itemClicked(String serialNumber) {
-        //TODO: move to product preview activity
-        binding.homeHeader.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.grey));
+        goToProductPreviewActivity(serialNumber);
     }
 
+    private void goToProductPreviewActivity(String serialNumber) {
+        // Create an Intent to switch to the ProductPreviewActivity
+        Intent intent = new Intent(getContext(), ProductPreviewActivity.class);
+        // Pass the serial number of the product to the ProductPreviewActivity
+        intent.putExtra("serial_number", serialNumber);
+        // Start the ProductPreviewActivity
+        startActivity(intent);
+    }
 
-    private void loadProductList() {
+    public void loadProductList() {
         //CycleView: Product List
         ProductAdapter productAdapter = new ProductAdapter(this.getContext(), CurrentUser.getInstance().getUserProfile().getProductList());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
@@ -80,7 +107,7 @@ public class HomeFragment extends Fragment {
         binding.homeLSTProducts.setAdapter(productAdapter);
         productAdapter.setProductCallback(new CallBack_Product() {
             @Override
-            public void productPreviewClicked(Product product, String productId) {
+            public void productPreviewClicked(Product product, int position) {
                 itemClicked(product.getSerialNumber());
             }
         });

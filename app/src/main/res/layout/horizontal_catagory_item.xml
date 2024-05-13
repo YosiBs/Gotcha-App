@@ -1,35 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.cardview.widget.CardView
+    android:id="@+id/category_CARD_data"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="50dp"
+    android:layout_marginVertical="@dimen/item_card_margin_vertical"
+    app:cardCornerRadius="@dimen/preview_corner_radius"
+    android:elevation="@dimen/category_elevation"
+    app:cardElevation="@dimen/category_elevation"
+    >
 
-
-
-
-
-    <!--CARD TO SHOW ALL THE DETAILS-->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/category_CARD_data"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/category_card_height"
-        android:layout_marginStart="@dimen/category_start_margin"
-        android:layout_marginEnd="@dimen/category_end_margin"
-        android:layout_marginVertical="@dimen/category_end_margin"
-        android:elevation="@dimen/category_elevation"
-        app:cardCornerRadius="@dimen/preview_corner_radius"
-        app:cardElevation="@dimen/category_elevation"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="24dp"
             android:orientation="horizontal"
-            android:baselineAligned="false">
+            >
 
 
 
@@ -51,21 +39,18 @@
                 android:background="#99D066"
 
                 >
-                <!--TODO: add category name-->
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/category_LBL_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginStart="@dimen/category_end_margin"
-                    android:layout_marginTop="@dimen/category_end_margin"
-                    android:layout_marginEnd="@dimen/category_end_margin"
                     android:maxLines="2"
-                    android:minLines="2"
+                    android:minLines="1"
                     android:textSize="@dimen/title_text_size"
                     android:textStyle="bold"
-                    tools:text="Category Name" />
+                    tools:text="Category Name"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    />
 
 
             </RelativeLayout>
@@ -78,13 +63,19 @@
                 android:background="#8187FF"
 
                 >
-                <!--TODO: add item Counter-->
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="5"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:textSize="16sp"
+                    />
 
 
 
             </RelativeLayout>
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

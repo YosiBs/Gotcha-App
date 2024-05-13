@@ -1,10 +1,455 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.ProductPreviewActivity">
+    tools:context=".Activities.ProductPreviewActivity"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <include layout="@layout/top_bar_product_preview"
+            android:id="@+id/topbar"/>
+
+        <!--ITEM IMAGE-->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/pp_IMG_product"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/product_image_height"
+            android:src="@drawable/product_placeholder_icon"
+            android:background="@color/grey"
+            android:layout_marginBottom="24dp"
+            />
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/NSV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+<!--*-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                android:layout_marginHorizontal="8dp"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Product Name:"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:id="@+id/pp_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="xxx"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+<!--2-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                android:layout_marginHorizontal="8dp"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cost:"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:id="@+id/pp_cost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="xxx"
+
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+<!--3-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                android:layout_marginHorizontal="8dp"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Serial Number:"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:id="@+id/pp_serial_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="xxx"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+<!--*-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                android:layout_marginHorizontal="8dp"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Category:"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:id="@+id/pp_category"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="xxx"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+            <!--*-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                android:layout_marginHorizontal="8dp"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Purchase Date:"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:id="@+id/pp_purchase_date"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="xxx"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+            <!--*-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                android:layout_marginHorizontal="8dp"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Notes:"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:id="@+id/pp_notes"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="xxx"                        />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/pp_warranty_caption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Warranty"
+                android:textStyle="bold"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginTop="8dp"
+
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/black"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                android:layout_marginHorizontal="4dp"
+
+                />
+            <!--*-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                android:layout_marginHorizontal="8dp"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Provider:"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:id="@+id/pp_w_provider"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="xxx"                        />
+                </RelativeLayout>
+            </LinearLayout>
+            <!--*-->
+            <!--*-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                android:layout_marginHorizontal="8dp"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ID Number:"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:id="@+id/pp_w_ID_number"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="xxx"                        />
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                android:layout_marginHorizontal="8dp"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Start Date:"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/pp_w_start_date"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        tools:text="xxx" />
+                </RelativeLayout>
+            </LinearLayout>
+            <!--*-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                android:layout_marginHorizontal="8dp"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="End Date:"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:id="@+id/pp_w_end_date"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="xxx"                        />
+                </RelativeLayout>
+            </LinearLayout>
+            <!--*-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                android:layout_marginHorizontal="8dp"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Coverage Details:"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:id="@+id/pp_w_coverage"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="xxx"                        />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <!--*-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginVertical="@dimen/form_input_text_margin_vertical"
+                android:layout_marginHorizontal="8dp"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contact:"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:id="@+id/pp_w_contact"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="xxx"                        />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

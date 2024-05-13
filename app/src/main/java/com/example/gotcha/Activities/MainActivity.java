@@ -11,11 +11,17 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.gotcha.Adapters.ProductAdapter;
 import com.example.gotcha.Fragments.AddItemFragment;
 import com.example.gotcha.Fragments.CategoriesFragment;
 import com.example.gotcha.Fragments.HomeFragment;
+import com.example.gotcha.Interfaces.CallBack_Product;
+import com.example.gotcha.Logics.FirebaseManager;
 import com.example.gotcha.Models.CurrentUser;
+import com.example.gotcha.Models.Product;
 import com.example.gotcha.Models.User;
 import com.example.gotcha.R;
 import com.example.gotcha.Fragments.SettingsFragment;
@@ -34,21 +40,29 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new HomeFragment()); // when the user open the app he will see the home fragment
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
             return insets;
         });
-
         //init CurrentUser:
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currentUser != null){
             User user = new User(currentUser.getUid(), currentUser.getDisplayName(), currentUser.getPhotoUrl().toString());
             CurrentUser.getInstance().setUserProfile(user);
         }
+        FirebaseManager.getInstance().loadUserDetails(CurrentUser.getInstance().getUid(), new FirebaseManager.OnUserLoadListener() {
+            @Override
+            public void onUserLoaded(User user) {
 
+            }
+
+            @Override
+            public void onUserLoadFailed(String errorMessage) {
+
+            }
+        });
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             if(item.getItemId() == R.id.home){
                 replaceFragment(new HomeFragment());
@@ -63,11 +77,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    private void replaceFragment(Fragment fragment){
+    public void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager= getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout , fragment);
         fragmentTransaction.commit();
     }
+
+
 
 }

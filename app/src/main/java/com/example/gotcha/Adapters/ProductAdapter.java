@@ -88,9 +88,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public int getItemCount() {
         return products == null ? 0 : products.size();
     }
-    private Product getItem(int position){
+    private Product getItem(int position) {
         return products.get(position);
     }
+
 
     public class ProductViewHolder extends RecyclerView.ViewHolder{
 
@@ -115,7 +116,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             product_CARD_data.setOnClickListener(v -> {
 
                 if(productCallback!=null){
-                    productCallback.productPreviewClicked(getItem(0),"AAA");
+                    productCallback.productPreviewClicked(getItem(getAdapterPosition()),getAdapterPosition());
                 }
 
             });

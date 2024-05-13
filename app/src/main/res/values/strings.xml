@@ -23,6 +23,8 @@
     <string name="coverage_details">\ Coverage Details</string>
     <string name="warranty_id_number">\ Warranty ID Number</string>
     <string name="warranty_provider_number">\ Warranty Provider Number</string>
+    <string name="product_preview">Product Preview</string>
+    <string name="categories">Categories</string>
 
 
     <string-array name="categories">

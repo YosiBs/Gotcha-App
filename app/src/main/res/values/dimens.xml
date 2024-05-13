@@ -43,6 +43,10 @@
     <dimen name="calender_button_height">55dp</dimen>
     <dimen name="selectDate_hint_text_size">14sp</dimen>
     <dimen name="pick_date_text_size">16sp</dimen>
+    <dimen name="top_bar_padding">16dp</dimen>
+    <dimen name="top_bar_text_size">20sp</dimen>
+    <dimen name="item_card_margin_vertical">4dp</dimen>
+    <dimen name="item_card_margin_horizontal">12dp</dimen>
 
 
 </resources>

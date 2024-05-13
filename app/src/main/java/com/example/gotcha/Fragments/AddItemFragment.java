@@ -13,6 +13,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +28,8 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.gotcha.Activities.MainActivity;
+import com.example.gotcha.Activities.ProductPreviewActivity;
 import com.example.gotcha.Logics.FirebaseManager;
 import com.example.gotcha.Models.CurrentUser;
 import com.example.gotcha.Models.Product;
@@ -130,11 +134,31 @@ public class AddItemFragment extends Fragment {
         binding.BTNsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submitForm();
+                boolean successful = submitForm();
+                if(successful){
+                    Toast.makeText(getContext(), "New Item Created", Toast.LENGTH_SHORT).show();
+                    goToHomeFragment(new HomeFragment());
+                }
             }
         });
 
     }
+
+    private void goToProductPreview(String serialNumber) {
+        // Create an Intent to switch to the ProductPreviewActivity
+        Intent intent = new Intent(getContext(), ProductPreviewActivity.class);
+        // Pass the serial number of the product to the ProductPreviewActivity
+        intent.putExtra("serial_number", serialNumber);
+        // Start the ProductPreviewActivity
+        startActivity(intent);
+    }
+
+    private void goToHomeFragment(Fragment fragment) {
+        if (getActivity() != null && getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).replaceFragment(fragment);
+        }
+    }
+
 
     private void selectImage() {
         Intent intent = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -154,18 +178,22 @@ public class AddItemFragment extends Fragment {
 
     }
 
-    private void submitForm() {
+    private boolean submitForm() {
         Product product = createNewProduct();
+        if(product.getSerialNumber().isEmpty()){
+            return false;
+        }
         // update Database
         FirebaseManager firebaseManager = FirebaseManager.getInstance();
         // go to product preview
         String userId = CurrentUser.getInstance().getUserProfile().getUid();
         firebaseManager.addNewProduct(userId, product);
+        return true;
     }
 
     private Product createNewProduct() {
 
-        boolean areProductEssentialsFilled ;
+        boolean areProductEssentialsFilled = false ;
         boolean areWarrantyEssentialsFilled = false;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 //<!--ITEM IMAGE-->
@@ -217,10 +245,9 @@ public class AddItemFragment extends Fragment {
 
 //<!--ITEM Notes-->
         String notes = String.valueOf(binding.formItemNotes.getText().toString().trim());
-        if (notes.isEmpty()) {
-            notes = "N/A";
+        if (!notes.isEmpty()) {
+            newProduct.setNotes(notes);
         }
-        newProduct.setNotes(notes);
 //<!--ITEM Warranty CheckBox-->
         newProduct.setHasWarranty(binding.hasWarrantyCheckBox.isChecked());
 // Check if any of the essential fields are empty
