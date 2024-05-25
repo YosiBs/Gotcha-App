@@ -11,6 +11,7 @@ public class User {
     private String image;
     private boolean isRegistered;
     private ArrayList<Product> productList = new ArrayList<Product>();
+    private ArrayList<Category> categoryList = new ArrayList<Category>();
     public User(){
 
     }
@@ -62,6 +63,15 @@ public class User {
 
     public User setRegistered(boolean registered) {
         isRegistered = registered;
+        return this;
+    }
+
+    public ArrayList<Category> getCategoryList() {
+        return categoryList;
+    }
+
+    public User setCategoryList(ArrayList<Category> categoryList) {
+        this.categoryList = categoryList;
         return this;
     }
 

@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.gotcha.Models.Category;
 import com.example.gotcha.Models.CurrentUser;
 import com.example.gotcha.Models.Product;
 import com.example.gotcha.Models.User;
@@ -19,7 +20,8 @@ import java.util.ArrayList;
 
 public class FirebaseManager {
     private static final String USERS_NODE = "Users";
-    private static final String PRODUCTS_NODE = "products";
+    private static final String PRODUCTS_NODE = "Products";
+    private static final String CATEGORIES_NODE = "categoryList";
 
     private static FirebaseManager instance;
     private final DatabaseReference databaseReference;
@@ -48,6 +50,7 @@ public class FirebaseManager {
         }
     }
 
+
     // Example method to update a product in the database
     public void updateProduct(String userId, String productId, Product updatedProduct) {
         DatabaseReference productRef = databaseReference.child(USERS_NODE)
@@ -63,6 +66,46 @@ public class FirebaseManager {
         // Remove the product with the given productId
         productsRef.child(productId).removeValue();
     }
+
+
+
+    public void addCategory(String userId, String categoryId, Category category) {
+        DatabaseReference categoryRef = databaseReference.child(USERS_NODE)
+                .child(userId)
+                .child(CATEGORIES_NODE)
+                .child(categoryId);
+        categoryRef.setValue(category);
+    }
+
+    public void removeCategory(String userId, String categoryId) {
+        DatabaseReference categoryRef = databaseReference.child(USERS_NODE)
+                .child(userId)
+                .child(CATEGORIES_NODE)
+                .child(categoryId);
+        categoryRef.removeValue();
+    }
+
+    public void addProductToCategory(String userId, String categoryId, Product product) {
+        DatabaseReference categoryRef = databaseReference.child(USERS_NODE)
+                .child(userId)
+                .child(CATEGORIES_NODE)
+                .child(categoryId)
+                .child(PRODUCTS_NODE);
+        String productId = product.getSerialNumber();
+        if (productId != null) {
+            categoryRef.child(productId).setValue(product);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 
 
     public void checkUserExistence(String userId, final OnUserExistenceListener listener) {

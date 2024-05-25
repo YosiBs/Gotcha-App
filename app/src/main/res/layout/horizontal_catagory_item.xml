@@ -15,7 +15,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="24dp"
+            android:layout_height="48dp"
             android:orientation="horizontal"
             >
 
@@ -26,9 +26,21 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#FF80AB"
+                tools:background="#FF80AB"
                 >
                 <!--TODO: add colored dot-->
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/category_CARD_circle_dot"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@color/black"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    app:civ_border_color="@color/white"
+                    app:civ_border_width="1dp"
+
+
+                    />
 
             </RelativeLayout>
 
@@ -36,7 +48,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                android:background="#99D066"
+                tools:background="#99D066"
 
                 >
                 <com.google.android.material.textview.MaterialTextView
@@ -60,10 +72,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#8187FF"
+                tools:background="#8187FF"
 
                 >
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/category_Card_counter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="5"

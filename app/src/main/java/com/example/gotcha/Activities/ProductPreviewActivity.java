@@ -49,7 +49,7 @@ public class ProductPreviewActivity extends AppCompatActivity {
 
         currentSerialNumber = getSerialNumberFromIntent();
         currentProduct = getCurrentProduct(currentSerialNumber);
-        Log.d("fff", "PPP= "+ currentProduct);
+        Log.d("fff", "PPP= " + currentProduct);
 
         initViews();
 
@@ -95,11 +95,8 @@ public class ProductPreviewActivity extends AppCompatActivity {
         binding.ppName.setText(currentProduct.getProductName());
         binding.ppCost.setText(String.valueOf(currentProduct.getPrice()));
         binding.ppSerialNumber.setText(currentProduct.getSerialNumber());
-        if(currentProduct.getCategory() != Product.CategoryType.NA){
-            binding.ppCategory.setText(String.valueOf(currentProduct.getCategory()));
-        }else{
-            binding.ppCategory.setText("-");
-        }
+        binding.ppCategory.setText(String.valueOf(currentProduct.getCategory()));
+
         if(currentProduct.getPurchaseDate() != null){
             binding.ppPurchaseDate.setText(String.valueOf(currentProduct.getPurchaseDate()));
         }else{

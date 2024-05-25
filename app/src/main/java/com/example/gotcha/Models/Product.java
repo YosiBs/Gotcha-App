@@ -8,7 +8,6 @@ import java.util.Date;
 public class Product {
 
     public enum CategoryType {
-        NA,
         ELECTRONICS,
         APPLIANCES,
         CLOTHING,
@@ -26,7 +25,7 @@ public class Product {
         OTHER
     }
     private String productName = "";  // Name of the product.
-    private CategoryType category = CategoryType.NA ; // Category of the product (e.g., electronics, appliances).
+    private CategoryType category = CategoryType.OTHER ; // Category of the product (e.g., electronics, appliances).
     private double price = 0.0 ; // Price of the product.
     private String purchaseDate ; // Date when the product was purchased.
     private String serialNumber = "" ; // Serial number of the product (if applicable).

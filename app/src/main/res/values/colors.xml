@@ -6,7 +6,24 @@
     <color name="colorPrimary">#E91E63</color>
     <color name="colorPrimaryDark">#D81B60</color>
     <color name="colorAccent">#F48FB1</color>
-    <color name="grey">#BDBDBD</color>
+    <color name="grey">#F4F4F4</color>
+
+
+    <color name="electronics">#0078D7</color>
+    <color name="appliances">#767676</color>
+    <color name="clothing">#E91E63</color>
+    <color name="furniture">#795548</color>
+    <color name="sporting_goods">#4CAF50</color>
+    <color name="toys">#FF5722</color>
+    <color name="beauty">#FFC0CB</color>
+    <color name="books">#3F51B5</color>
+    <color name="jewelry">#FFD700</color>
+    <color name="automotive">#F44336</color>
+    <color name="home_and_garden">#8BC34A</color>
+    <color name="health_and_wellness">#009688</color>
+    <color name="office_supplies">#3E2723</color>
+    <color name="food_and_drink">#FF9800</color>
+    <color name="other">#9E9E9E</color>
 
 
 </resources>

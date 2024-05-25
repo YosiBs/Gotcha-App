@@ -51,6 +51,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        loadProductList();
+
 
     }
 
@@ -100,6 +102,17 @@ public class HomeFragment extends Fragment {
 
     public void loadProductList() {
         //CycleView: Product List
+        FirebaseManager.getInstance().loadUserDetails(CurrentUser.getInstance().getUid(), new FirebaseManager.OnUserLoadListener() {
+            @Override
+            public void onUserLoaded(User user) {
+
+            }
+
+            @Override
+            public void onUserLoadFailed(String errorMessage) {
+
+            }
+        });
         ProductAdapter productAdapter = new ProductAdapter(this.getContext(), CurrentUser.getInstance().getUserProfile().getProductList());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);

@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Gotcha"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.CategoryPreviewActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.ProductPreviewActivitty"
             android:exported="false" />
         <activity

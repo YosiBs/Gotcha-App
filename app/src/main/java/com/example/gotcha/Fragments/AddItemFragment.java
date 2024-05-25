@@ -31,6 +31,7 @@ import android.widget.Toast;
 import com.example.gotcha.Activities.MainActivity;
 import com.example.gotcha.Activities.ProductPreviewActivity;
 import com.example.gotcha.Logics.FirebaseManager;
+import com.example.gotcha.Models.Category;
 import com.example.gotcha.Models.CurrentUser;
 import com.example.gotcha.Models.Product;
 import com.example.gotcha.R;
@@ -47,6 +48,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -180,15 +182,35 @@ public class AddItemFragment extends Fragment {
 
     private boolean submitForm() {
         Product product = createNewProduct();
+        if(product == null){
+            return false;
+        }
         if(product.getSerialNumber().isEmpty()){
             return false;
         }
+        addProductToCategory(product);
         // update Database
         FirebaseManager firebaseManager = FirebaseManager.getInstance();
         // go to product preview
         String userId = CurrentUser.getInstance().getUserProfile().getUid();
         firebaseManager.addNewProduct(userId, product);
+
         return true;
+    }
+
+    private void addProductToCategory(Product product) {
+        for(Category category : CurrentUser.getInstance().getUserProfile().getCategoryList()) {
+            if (category.getType() == product.getCategory()) {
+                category.getProductList().add(product);
+                category.setProductCount(category.getProductCount() + 1);
+                break;
+            }
+        }
+        ArrayList<Category> categoryArrayList = CurrentUser.getInstance().getUserProfile().getCategoryList();
+        categoryArrayList.add(new Category(product.getCategory()));
+        categoryArrayList.get(categoryArrayList.size() - 1).getProductList().add(product);
+        categoryArrayList.get(categoryArrayList.size() - 1).setProductCount(categoryArrayList.get(categoryArrayList.size() - 1).getProductCount() + 1);
+
     }
 
     private Product createNewProduct() {
@@ -310,11 +332,13 @@ public class AddItemFragment extends Fragment {
 
         if (!areProductEssentialsFilled || (newProduct.isHasWarranty() && !areWarrantyEssentialsFilled)) {
             // Show error message or toast indicating that all essential fields must be filled
+            Log.d("fff", "areProductEssentialsFilled = " + areProductEssentialsFilled + ", areWarrantyEssentialsFilled = " + areWarrantyEssentialsFilled);
             Toast.makeText(requireContext(), "Please fill all essential fields", Toast.LENGTH_SHORT).show();
+            return null;
         } else {
             CurrentUser.getInstance().getUserProfile().getProductList().add(newProduct);
+            return newProduct;
         }
-        return newProduct;
     }
 
     private void uploadImage() {
