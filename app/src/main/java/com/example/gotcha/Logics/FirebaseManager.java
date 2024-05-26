@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class FirebaseManager {
     private static final String USERS_NODE = "Users";
     private static final String PRODUCTS_NODE = "Products";
-    private static final String CATEGORIES_NODE = "categoryList";
+    private static final String CATEGORIES_NODE = "CategoryList";
 
     private static FirebaseManager instance;
     private final DatabaseReference databaseReference;
@@ -96,10 +96,6 @@ public class FirebaseManager {
             categoryRef.child(productId).setValue(product);
         }
     }
-
-
-
-
 
 
 

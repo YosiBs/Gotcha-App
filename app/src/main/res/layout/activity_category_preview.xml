@@ -17,11 +17,14 @@
     <include layout="@layout/top_bar_category_details"
         android:id="@+id/topbar_category"/>
 
-
-
-
     </LinearLayout>
 
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/category_LST_products"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/product_list_marginTop"
+        tools:listitem="@layout/horizontal_product_item" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

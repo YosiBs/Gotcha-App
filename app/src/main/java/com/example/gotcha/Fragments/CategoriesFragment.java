@@ -43,13 +43,19 @@ public class CategoriesFragment extends Fragment {
         binding = FragmentCategoriesBinding.inflate(inflater, container, false);
         initViews();
         Log.d("ddd", "Here 1");
-        initCategoryList();
+        //initCategoryList();
         Log.d("ddd", "Here 2");
         loadCategoryList();
         Log.d("ddd", "Here 3");
         Log.d("ddd", "Here, Category list: " + CurrentUser.getInstance().getUserProfile().getCategoryList());
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initCategoryList();
     }
 
     private void initCategoryList() {

@@ -11,10 +11,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.gotcha.Adapters.ProductAdapter;
+import com.example.gotcha.Interfaces.CallBack_Product;
+import com.example.gotcha.Logics.FirebaseManager;
 import com.example.gotcha.Models.Category;
 import com.example.gotcha.Models.CurrentUser;
 import com.example.gotcha.Models.Product;
+import com.example.gotcha.Models.User;
 import com.example.gotcha.R;
 import com.example.gotcha.databinding.ActivityCategoryPreviewBinding;
 
@@ -39,11 +45,17 @@ public class CategoryPreviewActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
             return insets;
         });
-
         categoryType = getCategoryTypeFromIntent();
         currCategory = getCurrentCategory(categoryType);
+        loadProductList(currCategory);
 
         initViews();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
     }
 
     private void initViews() {
@@ -79,5 +91,47 @@ public class CategoryPreviewActivity extends AppCompatActivity {
             }
         }
         return null;
+    }
+
+    public void loadProductList(Category currCategory) {
+        //CycleView: Product List
+        FirebaseManager.getInstance().loadUserDetails(CurrentUser.getInstance().getUid(), new FirebaseManager.OnUserLoadListener() {
+            @Override
+            public void onUserLoaded(User user) {
+
+            }
+
+            @Override
+            public void onUserLoadFailed(String errorMessage) {
+
+            }
+        });
+        if(currCategory.getProductList() == null){
+            throw new RuntimeException("currCategory.getProductList() is null");
+        }
+        ProductAdapter productAdapter = new ProductAdapter(this, currCategory.getProductList());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+        binding.categoryLSTProducts.setLayoutManager(linearLayoutManager);
+        binding.categoryLSTProducts.setAdapter(productAdapter);
+        productAdapter.setProductCallback(new CallBack_Product() {
+            @Override
+            public void productPreviewClicked(Product product, int position) {
+                itemClicked(product.getSerialNumber());
+            }
+        });
+
+    }
+    private void itemClicked(String serialNumber) {
+        goToProductPreviewActivity(serialNumber);
+    }
+
+    private void goToProductPreviewActivity(String serialNumber) {
+        // Create an Intent to switch to the ProductPreviewActivity
+        Intent intent = new Intent(this, ProductPreviewActivity.class);
+        // Pass the serial number of the product to the ProductPreviewActivity
+        intent.putExtra("serial_number", serialNumber);
+        // Start the ProductPreviewActivity
+        startActivity(intent);
     }
 }

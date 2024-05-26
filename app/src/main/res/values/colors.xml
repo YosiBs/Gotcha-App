@@ -7,6 +7,8 @@
     <color name="colorPrimaryDark">#D81B60</color>
     <color name="colorAccent">#F48FB1</color>
     <color name="grey">#F4F4F4</color>
+    <color name="greyer">#616161</color>
+    <color name="light_grey">#E0E0E0</color>
 
 
     <color name="electronics">#0078D7</color>

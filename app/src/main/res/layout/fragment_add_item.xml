@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.AddItemFragment"
-    android:background="#F3F2EF"
+    android:background="@color/grey"
     >
 <!--NestedScrollView-->
     <androidx.core.widget.NestedScrollView
@@ -24,6 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/product_image_height"
                 android:src="@drawable/product_placeholder_icon"
+
                 android:background="@color/grey"/>
 <!--ITEM NAME-->
             <com.google.android.material.textfield.TextInputLayout
@@ -34,7 +35,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="@string/item_name"
                 app:boxStrokeColor="@color/black"
-                android:textColorHint="@color/grey"
+                android:textColorHint="@color/greyer"
                 >
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/formItemName"
@@ -42,6 +43,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:drawableStart = "@drawable/product_development"
+
                     android:textColor="@color/black"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -54,7 +56,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="@string/serial_number"
                 app:boxStrokeColor="@color/black"
-                android:textColorHint="@color/grey"
+                android:textColorHint="@color/greyer"
                 >
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/formSerialNumber"
@@ -76,7 +78,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="@string/product_price"
                 app:boxStrokeColor="@color/black"
-                android:textColorHint="@color/grey"
+                android:textColorHint="@color/greyer"
                 >
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/formItemPrice"
@@ -98,7 +100,7 @@
                 android:hint="@string/category"
                 app:startIconDrawable="@drawable/categorization"
                 app:boxStrokeColor="@color/black"
-                android:textColorHint="@color/grey"
+                android:textColorHint="@color/greyer"
                 android:textColor="@color/black"
                 >
                 <AutoCompleteTextView
@@ -159,7 +161,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="@string/notes"
                 app:boxStrokeColor="@color/black"
-                android:textColorHint="@color/grey"
+                android:textColorHint="@color/greyer"
                 >
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/formItemNotes"
@@ -193,7 +195,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="@string/warranty_provider"
                 app:boxStrokeColor="@color/black"
-                android:textColorHint="@color/grey"
+                android:textColorHint="@color/greyer"
                 android:visibility="gone"
                 tools:visibility="visible"
                 >
@@ -296,7 +298,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="@string/coverage_details"
                 app:boxStrokeColor="@color/black"
-                android:textColorHint="@color/grey"
+                android:textColorHint="@color/greyer"
                 android:visibility="gone"
                 tools:visibility="visible"
                 >
@@ -321,7 +323,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="@string/warranty_id_number"
                 app:boxStrokeColor="@color/black"
-                android:textColorHint="@color/grey"
+                android:textColorHint="@color/greyer"
                 android:visibility="gone"
                 tools:visibility="visible"
                 >
@@ -344,7 +346,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="@string/warranty_provider_number"
                 app:boxStrokeColor="@color/black"
-                android:textColorHint="@color/grey"
+                android:textColorHint="@color/greyer"
                 android:visibility="gone"
                 tools:visibility="visible"
                 >
