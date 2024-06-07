@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.gotcha.Fragments.HomeFragment;
+import com.example.gotcha.Logics.FirebaseManager;
 import com.example.gotcha.Models.CurrentUser;
 import com.example.gotcha.Models.Product;
 import com.example.gotcha.R;
@@ -75,6 +76,16 @@ public class ProductPreviewActivity extends AppCompatActivity {
                 finish();
             }
         });
+        ImageView deleteIcon = findViewById(R.id.delete_icon);
+        deleteIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteItem();
+                finish();
+            }
+        });
+
+
 
         if(!currentProduct.getImageUriString().isEmpty()) {
             Uri imageUri = Uri.parse(currentProduct.getImageUriString());
@@ -144,6 +155,11 @@ public class ProductPreviewActivity extends AppCompatActivity {
             // Handle case where serial number extra is not found
             return null;
         }
+    }
+
+    private void deleteItem(){
+        CurrentUser.getInstance().getUserProfile().getProductList().remove(currentProduct);
+        FirebaseManager.getInstance().deleteProduct(CurrentUser.getInstance().getUid(), currentProduct.getSerialNumber());
     }
 
 

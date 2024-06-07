@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +28,7 @@ import com.example.gotcha.Models.User;
 import com.example.gotcha.R;
 import com.example.gotcha.databinding.FragmentHomeBinding;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -124,6 +126,7 @@ public class HomeFragment extends Fragment {
                 itemClicked(product.getSerialNumber());
             }
         });
+
     }
 
 
@@ -138,5 +141,8 @@ public class HomeFragment extends Fragment {
                 .error(R.drawable.loading_error_image) // Error image if loading fails
                 .into(binding.profileImage);
     }
+
+
+
 
 }
