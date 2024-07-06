@@ -13,7 +13,7 @@
 
     <item android:title="Add Item"
         android:id="@+id/add_item"
-        android:icon="@drawable/qr_code_icon"
+        android:icon="@drawable/plus"
         />
 
     <item android:title="Settings"
